@@ -3,134 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INGCO Official Style Store</title>
+    <title>INGCO Store</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        body { 
-            font-family: 'Poppins', 'Segoe UI', Arial, sans-serif; 
-            background: #111111; 
-            color: #ffffff; 
-            margin: 0; 
-            padding: 0;
-            padding-bottom: 30px;
-        }
-        
-        header { 
-            text-align: center; 
-            padding: 20px 0; 
-            background: #000000; 
-            border-bottom: 4px solid #febd11; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-        }
-        header h1 { 
-            color: #febd11; 
-            margin: 0; 
-            font-size: 24px; 
-            text-transform: uppercase; 
-            letter-spacing: 2px;
-            font-weight: 800;
-        }
-        header p {
-            margin: 5px 0 0 0;
-            font-size: 11px;
-            color: #888;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .intro-text {
-            text-align: center;
-            font-size: 12px;
-            color: #aaa;
-            margin: 15px 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .section-title { 
-            font-size: 14px; 
-            color: #000000; 
-            background: #febd11;
-            padding: 10px 15px; 
-            margin: 25px 0 15px 0; 
-            font-weight: bold; 
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .grid { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 12px; 
-            padding: 0 12px;
-        }
-
-        .card { 
-            background: #1a1a1a; 
-            border-radius: 0px; 
-            padding: 12px; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: space-between; 
-            border: 1px solid #2a2a2a;
-        }
-        
-        .card .img-container {
-            width: 100%;
-            height: 130px;
-            background: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #eee;
-        }
-        .card img { 
-            max-width: 90%; 
-            max-height: 90%; 
-            object-fit: contain; 
-        }
-
-        .card .sku {
-            font-size: 9px;
-            color: #febd11;
-            margin: 8px 0 2px 0;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        .card h3 { 
-            font-size: 11px; 
-            margin: 0 0 6px 0; 
-            height: 34px; 
-            overflow: hidden; 
-            color: #ffffff; 
-            line-height: 1.4;
-            font-weight: 600;
-        }
-
-        .card .price { 
-            font-weight: 700; 
-            color: #febd11; 
-            font-size: 14px; 
-            margin-bottom: 8px; 
-        }
-
-        .btn { 
-            background: #febd11; 
-            color: #000000; 
-            border: none; 
-            padding: 10px; 
-            font-weight: 700; 
-            cursor: pointer; 
-            font-size: 11px; 
-            text-align: center; 
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            width: 100%;
-        }
-        .btn:active { 
-            background: #c9960e; 
-        }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #111; color: #fff; margin: 0; padding: 0; padding-bottom: 30px; }
+        header { text-align: center; padding: 20px 0; background: #000; border-bottom: 4px solid #febd11; }
+        header h1 { color: #febd11; margin: 0; font-size: 22px; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; }
+        header p { margin: 5px 0 0 0; font-size: 11px; color: #888; text-transform: uppercase; }
+        .intro-text { text-align: center; font-size: 12px; color: #aaa; margin: 15px 10px; text-transform: uppercase; }
+        .section-title { font-size: 14px; color: #000; background: #febd11; padding: 10px 15px; margin: 25px 0 15px 0; font-weight: bold; text-transform: uppercase; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 12px; }
+        .card { background: #1a1a1a; padding: 12px; display: flex; flex-direction: column; justify-content: space-between; border: 1px solid #2a2a2a; }
+        .card .img-container { width: 100%; height: 130px; background: #ffffff; display: flex; align-items: center; justify-content: center; }
+        .card img { max-width: 90%; max-height: 90%; object-fit: contain; }
+        .card .sku { font-size: 9px; color: #febd11; margin: 8px 0 2px 0; font-weight: bold; }
+        .card h3 { font-size: 11px; margin: 0 0 6px 0; height: 34px; overflow: hidden; color: #fff; line-height: 1.4; }
+        .card .price { font-weight: 700; color: #febd11; font-size: 14px; margin-bottom: 8px; }
+        .btn { background: #febd11; color: #000; border: none; padding: 10px; font-weight: 700; cursor: pointer; font-size: 11px; text-transform: uppercase; width: 100%; }
+        .btn:active { background: #c9960e; }
     </style>
 </head>
 <body>
@@ -146,7 +36,7 @@
     <div class="grid">
         <div class="card">
             <div class="img-container">
-                <img src="https://images.uzum.uz/cr6g7v7i99on7m4ajkbg/original.jpg">
+                <img src="https://ingco.com/cdn/shop/files/CDLI20021-1.jpg">
             </div>
             <div class="sku">CDLI20021</div>
             <h3>Дрель-шуруповерт аккумуляторная 20V</h3>
@@ -155,30 +45,12 @@
         </div>
         <div class="card">
             <div class="img-container">
-                <img src="https://images.uzum.uz/clco76en7c6qm23j6g6g/original.jpg">
+                <img src="https://ingco.com/cdn/shop/files/CGSLI20662.jpg">
             </div>
             <div class="sku">CGSLI20662</div>
             <h3>Мини-цепная пила аккумуляторная 20V</h3>
             <div class="price">970,000 сум</div>
             <button class="btn" onclick="orderProduct('Мини-пила CGSLI20662')">Add To Cart</button>
-        </div>
-        <div class="card">
-            <div class="img-container">
-                <img src="https://images.uzum.uz/co6mvt0vutv108t6jctg/original.jpg">
-            </div>
-            <div class="sku">HLL305205</div>
-            <h3>Лазерный уровень 3D под АКБ 20V</h3>
-            <div class="price">750,000 сум</div>
-            <button class="btn" onclick="orderProduct('Лазерный уровень HLL305205')">Add To Cart</button>
-        </div>
-        <div class="card">
-            <div class="img-container">
-                <img src="https://images.uzum.uz/cn7f29ps99on7m4e6fbg/original.jpg">
-            </div>
-            <div class="sku">CAGLI201158</div>
-            <h3>Аккумуляторная болгарка (УШМ) 20V</h3>
-            <div class="price">890,000 сум</div>
-            <button class="btn" onclick="orderProduct('Болгарка АКБ CAGLI201158')">Add To Cart</button>
         </div>
     </div>
 
@@ -186,7 +58,7 @@
     <div class="grid">
         <div class="card">
             <div class="img-container">
-                <img src="https://images.uzum.uz/clcoh0fn7c6qm23j6j80/original.jpg">
+                <img src="https://ingco.com/cdn/shop/products/AG9508-2.jpg">
             </div>
             <div class="sku">AG9508</div>
             <h3>Угловая шлифмашина (Болгарка) 950W</h3>
@@ -195,7 +67,7 @@
         </div>
         <div class="card">
             <div class="img-container">
-                <img src="https://images.uzum.uz/clcoe5fn7c6qm23j6gog/original.jpg">
+                <img src="https://ingco.com/cdn/shop/products/RGH10508-1.jpg">
             </div>
             <div class="sku">RGH10508</div>
             <h3>Перфоратор электрический SDS+ 1050W</h3>
@@ -208,7 +80,7 @@
     <div class="grid">
         <div class="card">
             <div class="img-container">
-                <img src="https://images.uzum.uz/clcn647n7c6qm23j65ag/original.jpg">
+                <img src="https://ingco.com/cdn/shop/products/HMH88016.jpg">
             </div>
             <div class="sku">HMH88016</div>
             <h3>Молоток-гвоздодер со стальной ручкой</h3>
@@ -217,12 +89,12 @@
         </div>
         <div class="card">
             <div class="img-container">
-                <img src="https://images.uzum.uz/ckb8gcbk9fq7ad343vmg/original.jpg">
+                <img src="https://ingco.com/cdn/shop/products/HCP08200_1.jpg">
             </div>
-            <div class="sku">HTC04600</div>
-            <h3>Профессиональный рельсовый плиткорез</h3>
-            <div class="price">1,450,000 сум</div>
-            <button class="btn" onclick="orderProduct('Плиткорез HTC04600')">Add To Cart</button>
+            <div class="sku">HCP08200</div>
+            <h3>Плоскогубцы комбинированные 200мм</h3>
+            <div class="price">65,000 сум</div>
+            <button class="btn" onclick="orderProduct('Плоскогубцы HCP08200')">Add To Cart</button>
         </div>
     </div>
 
