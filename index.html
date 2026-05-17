@@ -3,82 +3,235 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INGCO Store</title>
+    <title>INGCO Nepal Style Store</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        body { font-family: 'Segoe UI', Arial, sans-serif; background: #121212; color: #fff; margin: 0; padding: 10px; }
-        header { text-align: center; padding: 15px 0; background: #1e1e1e; border-bottom: 3px solid #febd11; border-radius: 8px; margin-bottom: 15px; }
-        header h1 { color: #febd11; margin: 0; font-size: 18px; text-transform: uppercase; letter-spacing: 1px; }
-        .section-title { font-size: 15px; color: #febd11; border-left: 4px solid #febd11; padding-left: 8px; margin: 20px 0 10px 0; font-weight: bold; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .card { background: #1e1e1e; border-radius: 10px; padding: 10px; display: flex; flex-direction: column; justify-content: space-between; border: 1px solid #2d2d2d; }
-        .card img { width: 100%; height: 110px; object-fit: contain; background: #fff; border-radius: 8px; }
-        .card h3 { font-size: 12px; margin: 8px 0 4px 0; height: 32px; overflow: hidden; color: #eee; line-height: 1.3; }
-        .card .price { font-weight: bold; color: #febd11; font-size: 13px; margin-bottom: 6px; }
-        .card .desc { font-size: 10px; color: #aaa; margin-bottom: 10px; height: 28px; overflow: hidden; }
-        .btn { background: #febd11; color: #111; border: none; padding: 8px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 12px; text-align: center; width: 100%; }
-        .btn:active { background: #d49e0c; }
+        /* Оригинальная палитра INGCO: черный, серый и фирменный желтый #febd11 */
+        body { 
+            font-family: 'Poppins', 'Segoe UI', Arial, sans-serif; 
+            background: #111111; 
+            color: #ffffff; 
+            margin: 0; 
+            padding: 0;
+            padding-bottom: 20px;
+        }
+        
+        /* Брендовая черная шапка */
+        header { 
+            text-align: center; 
+            padding: 20px 0; 
+            background: #000000; 
+            border-bottom: 4px solid #febd11; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+        header h1 { 
+            color: #febd11; 
+            margin: 0; 
+            font-size: 22px; 
+            text-transform: uppercase; 
+            letter-spacing: 2px;
+            font-weight: 800;
+        }
+        header p {
+            margin: 5px 0 0 0;
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Текст-приветствие */
+        .intro-text {
+            text-align: center;
+            font-size: 13px;
+            color: #ccc;
+            margin: 15px 10px;
+            font-style: italic;
+        }
+
+        /* Разделы категорий 1 в 1 как на сайте */
+        .section-title { 
+            font-size: 15px; 
+            color: #000000; 
+            background: #febd11;
+            padding: 8px 12px; 
+            margin: 25px 0 15px 0; 
+            font-weight: bold; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+        }
+
+        /* Мощная сетка для карточек */
+        .grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 12px; 
+            padding: 0 12px;
+        }
+
+        /* Стильная карточка товара */
+        .card { 
+            background: #1a1a1a; 
+            border-radius: 0px; /* На оригинальном сайте строгие углы */
+            padding: 12px; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between; 
+            border: 1px solid #2a2a2a;
+            transition: transform 0.2s;
+        }
+        
+        /* Идеально белое поле для фотографии инструмента */
+        .card .img-container {
+            width: 100%;
+            height: 120px;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #eee;
+        }
+        .card img { 
+            max-width: 95%; 
+            max-height: 95%; 
+            object-fit: contain; 
+        }
+
+        /* Название инструмента */
+        .card h3 { 
+            font-size: 12px; 
+            margin: 10px 0 4px 0; 
+            height: 34px; 
+            overflow: hidden; 
+            color: #ffffff; 
+            line-height: 1.4;
+            font-weight: 600;
+        }
+
+        /* Цена крупно желтым цветом */
+        .card .price { 
+            font-weight: 700; 
+            color: #febd11; 
+            font-size: 14px; 
+            margin-bottom: 6px; 
+        }
+
+        /* Короткое описание */
+        .card .desc { 
+            font-size: 10px; 
+            color: #999; 
+            margin-bottom: 12px; 
+            height: 28px; 
+            overflow: hidden; 
+            line-height: 1.3;
+        }
+
+        /* Кнопка Add To Cart как на оригинальном сайте */
+        .btn { 
+            background: #febd11; 
+            color: #000000; 
+            border: none; 
+            padding: 10px; 
+            font-weight: 700; 
+            cursor: pointer; 
+            font-size: 11px; 
+            text-align: center; 
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            width: 100%;
+            transition: background 0.2s;
+        }
+        .btn:active { 
+            background: #c9960e; 
+        }
     </style>
 </head>
 <body>
+
     <header>
-        <h1>INGCO — ТАШКЕНТ ИЗЗА</h1>
+        <h1>INGCO TOOLS</h1>
+        <p>Professional Tools Made Affordable</p>
     </header>
 
-    <div class="section-title">🔌 Электроинструменты</div>
-    <div class="grid">
-        <div class="card">
-            <img src="https://img.ingco.ru/upload/iblock/c38/c38947f6305a41d063717548f95c1c08.jpg">
-            <h3>🔋 Аккумуляторная дрель 20V</h3>
-            <div class="price">650,000 сум</div>
-            <div class="desc">💯 Оригинальный инструмент</div>
-            <button class="btn" onclick="orderProduct('🔋 Аккумуляторная дрель 20V')">🛒 Заказать</button>
-        </div>
-        <div class="card">
-            <img src="https://img.ingco.ru/upload/iblock/d76/d76f8a846f4813f3609804b41315582f.jpg">
-            <h3>⚡️ Болгарка (УШМ) 950W</h3>
-            <div class="price">480,000 сум</div>
-            <div class="desc">💯 Оригинальный инструмент</div>
-            <button class="btn" onclick="orderProduct('⚡️ Болгарка (УШМ) 950W')">🛒 Заказать</button>
-        </div>
-    </div>
+    <div class="intro-text">“INGCO — Качественный инструмент по доступной цене в Ташкенте”</div>
 
-    <div class="section-title">🔨 Ручной инструмент</div>
+    <div class="section-title">▶ HAND TOOLS (Ручной инструмент)</div>
     <div class="grid">
         <div class="card">
-            <img src="https://img.ingco.ru/upload/iblock/6ed/6ed24058d927d3d7580633b4999f8016.jpg">
+            <div class="img-container">
+                <img src="https://img.ingco.ru/upload/iblock/6ed/6ed24058d927d3d7580633b4999f8016.jpg">
+            </div>
             <h3>🔨 Молоток-гвоздодер кузнечный</h3>
             <div class="price">85,000 сум</div>
-            <div class="desc">Гарантия качества INGCO</div>
-            <button class="btn" onclick="orderProduct('🔨 Молоток-гвоздодер кузнечный')">🛒 Заказать</button>
+            <div class="desc">Углеродистая сталь, фибергласовая ручка.</div>
+            <button class="btn" onclick="orderProduct('🔨 Молоток-гвоздодер кузнечный')">Add To Cart</button>
         </div>
         <div class="card">
-            <img src="https://img.ingco.ru/upload/iblock/b3b/b3b754e38e12d4d98305c2a304e76a5c.jpg">
+            <div class="img-container">
+                <img src="https://img.ingco.ru/upload/iblock/b3b/b3b754e38e12d4d98305c2a304e76a5c.jpg">
+            </div>
             <h3>📐 Профессиональный Плиткорез</h3>
             <div class="price">1,450,000 сум</div>
-            <div class="desc">Усиленная станина, точный рез</div>
-            <button class="btn" onclick="orderProduct('📐 Профессиональный Плиткорез')">🛒 Заказать</button>
+            <div class="desc">Усиленная жесткая станина, идеальный рез.</div>
+            <button class="btn" onclick="orderProduct('📐 Профессиональный Плиткорез')">Add To Cart</button>
         </div>
     </div>
 
-    <div class="section-title">🏡 Садовая техника</div>
+    <div class="section-title">▶ POWER TOOLS (Электроинструмент)</div>
     <div class="grid">
         <div class="card">
-            <img src="https://img.ingco.ru/upload/iblock/c15/y4o8w9vux624j889q4w468u0n8f8c85q.jpg<h3>🪚 Мини-цепная пила CGSLI20662</h3>
+            <div class="img-container">
+                <img src="https://img.ingco.ru/upload/iblock/d76/d76f8a846f4813f3609804b41315582f.jpg">
+            </div>
+            <h3>⚡ Угловая шлифмашина (Болгарка) 950W</h3>
+            <div class="price">480,000 сум</div>
+            <div class="desc">Высокая выносливость мотора, 115-125мм.</div>
+            <button class="btn" onclick="orderProduct('⚡ Болгарка 950W')">Add To Cart</button>
+        </div>
+        <div class="card">
+            <div class="img-container">
+                <img src="https://img.ingco.ru/upload/iblock/b10/b1076f2cc76f7df26e632b7194f4a3de.jpg">
+            </div>
+            <h3>🧱 Перфоратор INGCO SDS+ 1050W</h3>
+            <div class="price">890,000 сум</div>
+            <div class="desc">Режимы: сверление, долбление, удар.</div>
+            <button class="btn" onclick="orderProduct('🧱 Перфоратор 1050W')">Add To Cart</button>
+        </div>
+    </div>
+
+    <div class="section-title">▶ CORDLESS TOOLS (Аккумуляторный)</div>
+    <div class="grid">
+        <div class="card">
+            <div class="img-container">
+                <img src="https://img.ingco.ru/upload/iblock/c38/c38947f6305a41d063717548f95c1c08.jpg">
+            </div>
+            <h3>🔋 Аккумуляторная дрель-шуруповерт 20V</h3>
+            <div class="price">650,000 сум</div>
+            <div class="desc">Система P20S, две скорости, Li-Ion АКБ.</div>
+            <button class="btn" onclick="orderProduct('🔋 Аккумуляторная дрель 20V')">Add To Cart</button>
+        </div>
+        <div class="card">
+            <div class="img-container">
+                <img src="https://img.ingco.ru/upload/iblock/c15/y4o8w9vux624j889q4w468u0n8f8c85q.jpg">
+            </div>
+            <h3>🪚 Мини-цепная пила 20V CGSLI20662</h3>
             <div class="price">970,000 сум</div>
-            <div class="desc">Бесщёточный двигатель 20V</div>
-            <button class="btn" onclick="orderProduct('🪚 Мини-цепная пила CGSLI20662')">🛒 Заказать</button>
+            <div class="desc">Бесщёточный мотор, шина 15 см, кейс.</div>
+            <button class="btn" onclick="orderProduct('🪚 Мини-цепная пила 20V')">Add To Cart</button>
         </div>
     </div>
 
-    <div class="section-title">💨 Компрессоры и Пневматика</div>
+    <div class="section-title">▶ AIR TOOLS (Компрессоры)</div>
     <div class="grid">
         <div class="card">
-            <img src="https://img.ingco.ru/upload/iblock/6a7/6a7828ce2cc4fdcf54316682b137bc38.jpg">
-            <h3>💨 Компрессор воздушный 50L</h3>
+            <div class="img-container">
+                <img src="https://img.ingco.ru/upload/iblock/6a7/6a7828ce2cc4fdcf54316682b137bc38.jpg">
+            </div>
+            <h3>💨 Компрессор масляный воздушный 50L</h3>
             <div class="price">2,100,000 сум</div>
-            <div class="desc">Высокая производительность</div>
-            <button class="btn" onclick="orderProduct('💨 Компрессор воздушный 50L')">🛒 Заказать</button>
+            <div class="desc">Надежный двигатель для автосервиса и дома.</div>
+            <button class="btn" onclick="orderProduct('💨 Компрессор 50L')">Add To Cart</button>
         </div>
     </div>
 
