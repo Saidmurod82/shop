@@ -36,7 +36,7 @@
             color: #fff;
             width: 100%;
             padding: 15px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 700;
             text-align: left;
             border: 1px solid #333;
@@ -49,7 +49,7 @@
             text-transform: uppercase;
         }
         .category-btn:active { background: #2a2a2a; }
-        .category-btn .arrow { color: #febd11; font-size: 16px; transition: transform 0.2s; }
+        .category-btn .arrow { color: #febd11; font-size: 14px; transition: transform 0.2s; }
         .category-btn.active .arrow { transform: rotate(90deg); }
 
         /* Выпадающий список товаров */
@@ -89,8 +89,8 @@
     </header>
 
     <div class="banner">
-        <h2>ОФИЦИАЛЬНЫЙ СТИЛЬ МАСГАЗИНА</h2>
-        <p>Качественный инструмент в Ташкенте (Массив Изза)</p>
+        <h2>ОФИЦИАЛЬНЫЙ СТИЛЬ МАГАЗИНА</h2>
+        <p>Качественный инструмент в Ташкенте (ИЗЗА курилиш бозори)</p>
         <p style="font-size: 10px; margin-top: 5px; opacity: 0.8;">⚡️ Товарлар кафолатланган / Гарантия качества ⚡️</p>
     </div>
 
@@ -98,7 +98,7 @@
 
     <div class="category-container">
         <button class="category-btn" onclick="toggleCategory(this, 'cat1')">
-            <span>🔋 CORDLESS TOOLS / Аккумуляторли асбоблар</span>
+            <span>🔋 Аккумуляторный инструмент / Аккумуляторли асбоблар</span>
             <span class="arrow">▶</span>
         </button>
         <div id="cat1" class="category-content">
@@ -136,7 +136,7 @@
 
     <div class="category-container">
         <button class="category-btn" onclick="toggleCategory(this, 'cat2')">
-            <span>🔌 POWER TOOLS / Электр асбоблар</span>
+            <span>🔌 Электроинструменты / Электр асбоблар</span>
             <span class="arrow">▶</span>
         </button>
         <div id="cat2" class="category-content">
@@ -174,7 +174,7 @@
 
     <div class="category-container">
         <button class="category-btn" onclick="toggleCategory(this, 'cat3')">
-            <span>🛠 HAND TOOLS / Қўл асбоблари</span>
+            <span>🛠 Ручной инструмент / Қўл асбоблари</span>
             <span class="arrow">▶</span>
         </button>
         <div id="cat3" class="category-content">
@@ -214,7 +214,6 @@
         let tg = window.Telegram.WebApp;
         tg.expand(); 
         
-        // Функция раскрытия категорий
         function toggleCategory(btn, id) {
             btn.classList.toggle('active');
             let content = document.getElementById(id);
