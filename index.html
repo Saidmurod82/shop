@@ -32,10 +32,10 @@
         
         .badge { position: absolute; top: 5px; right: 5px; background: #e62e2d; color: #fff; font-size: 8px; font-weight: bold; padding: 2px 5px; border-radius: 3px; z-index: 10; text-transform: uppercase; }
 
-        /* ИСПРАВЛЕНО: Белый красивый холст, центрирующий прямоугольные картинки */
+        /* ИСПРАВЛЕНО: Контейнер увеличен до 140px, картинка заполняет его полностью благодаря object-fit: cover */
         .card .img-container { 
             width: 100%; 
-            height: 130px; 
+            height: 140px; 
             background: #ffffff; 
             display: flex; 
             align-items: center; 
@@ -43,13 +43,12 @@
             margin-bottom: 8px; 
             overflow: hidden;
             border-radius: 4px;
-            padding: 4px;
             box-sizing: border-box;
         }
         .card .img-container img { 
-            max-width: 100%; 
-            max-height: 100%; 
-            object-fit: contain; 
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
             display: block;
         }
         
@@ -90,7 +89,7 @@
         <div id="cat1" class="category-content">
             <div class="grid">
                 <div class="card">
-                    <div class="img-container"><img src="HCP08200.jpg" onerror="this.src='hcp08200.jpg'"></div>
+                    <div class="img-container"><img src="HCP08200.jpg" onerror="this.src='https://saidmurod82.github.io/shop/distributor_banner.jpg'"></div>
                     <div class="sku">HCP08200</div>
                     <h3>Плоскогубцы 200мм</h3>
                     <div class="price-box">
@@ -110,7 +109,7 @@
         <div id="cat2" class="category-content" style="display: none;">
             <div class="grid">
                 <div class="card">
-                    <div class="img-container"><img src="AG9508.jpg" onerror="this.src='ag9508.jpg'"></div>
+                    <div class="img-container"><img src="AG9508.jpg" onerror="this.src='https://saidmurod82.github.io/shop/distributor_banner.jpg'"></div>
                     <div class="sku">AG9508</div>
                     <h3>Болгарка 950W</h3>
                     <div class="price-box">
@@ -130,7 +129,7 @@
         <div id="cat3" class="category-content">
             <div class="grid">
                 <div class="card">
-                    <div class="img-container"><img src="CDLI20453.jpg" onerror="this.src='cdli20453.jpg'"></div>
+                    <div class="img-container"><img src="CDLI20453.jpg" onerror="this.src='https://saidmurod82.github.io/shop/distributor_banner.jpg'"></div>
                     <div class="sku">CDLI20453</div>
                     <h3>Дрель-шуруповерт 20V 45Нм</h3>
                     <div class="description-box">
@@ -145,7 +144,7 @@
 
                 <div class="card">
                     <div class="badge">Скидка 11%</div>
-                    <div class="img-container"><img src="CGSLI20882.jpg" onerror="this.src='cgsli20882.jpg'"></div>
+                    <div class="img-container"><img src="CGSLI20882.jpg" onerror="this.src='https://saidmurod82.github.io/shop/distributor_banner.jpg'"></div>
                     <div class="sku">CGSLI20882</div>
                     <h3>Аккумуляторная цепная пила 8"</h3>
                     <div class="description-box">
@@ -161,7 +160,7 @@
 
                 <div class="card">
                     <div class="badge">Скидка 15%</div>
-                    <div class="img-container"><img src="CMLI20228.jpg" onerror="this.src='cmli20228.jpg'"></div>
+                    <div class="img-container"><img src="CMLI20228.jpg" onerror="this.src='https://saidmurod82.github.io/shop/distributor_banner.jpg'"></div>
                     <div class="sku">CMLI20228</div>
                     <h3>Реноватор многофункциональный</h3>
                     <div class="description-box">
@@ -190,7 +189,7 @@
 
     <div class="category-container">
         <button class="category-btn" onclick="toggleCategory(this, 'cat5')">
-            <span>📏 Измерительные инструменты / Ўлчов асбоблары</span>
+            <span>📏 Измерительные инструменты / Ўлчов асбоблари</span>
             <span class="arrow">◀</span>
         </button>
         <div id="cat5" class="category-content" style="display: none;">
@@ -216,7 +215,7 @@
         <div id="cat7" class="category-content" style="display: none;">
             <div class="grid">
                 <div class="card">
-                    <div class="img-container"><img src="CGSLI20662.jpg" onerror="this.src='cgsli20662.jpg'"></div>
+                    <div class="img-container"><img src="CGSLI20662.jpg" onerror="this.src='https://saidmurod82.github.io/shop/distributor_banner.jpg'"></div>
                     <div class="sku">CGSLI20662</div>
                     <h3>Мини-пила 20V</h3>
                     <div class="price-box">
