@@ -25,8 +25,8 @@
         .category-btn:active { background: #2a2a2a; }
         .category-btn .arrow { color: #febd11; font-size: 10px; transition: transform 0.2s; }
 
-        /* ИСПРАВЛЕНО: Сетки товаров по умолчанию скрыты во всех категориях */
-        .category-content { display: none; background: #161616; padding: 12px 6px; border: 1px solid #333; border-top: none; }
+        /* ИСПРАВЛЕНО: Жестко скрываем контент изначально */
+        .category-content { display: none !important; background: #161616; padding: 12px 6px; border: 1px solid #333; border-top: none; }
         
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         .card { background: #1f1f1f; padding: 10px; border: 1px solid #2a2a2a; display: flex; flex-direction: column; justify-content: space-between; position: relative; border-radius: 4px; }
@@ -241,16 +241,29 @@
         let tg = window.Telegram.WebApp;
         tg.expand(); 
 
-        // ИСПРАВЛЕНО: Функция теперь проверяет текущее состояние и переключает со стрелочками
+        // ИСПРАВЛЕНО: Принудительно закрываем все категории скриптом сразу при загрузке страницы
+        document.addEventListener("DOMContentLoaded", function() {
+            let contents = document.querySelectorAll('.category-content');
+            contents.forEach(function(content) {
+                content.style.setProperty('display', 'none', 'important');
+            });
+            let arrows = document.querySelectorAll('.arrow');
+            arrows.forEach(function(arrow) {
+                arrow.innerText = "▶";
+            });
+        });
+
+        // ИСПРАВЛЕНО: Четкое управление разворачиванием/сворачиванием
         function toggleCategory(btn, id) {
             let content = document.getElementById(id);
             let arrow = btn.querySelector('.arrow');
             
-            if (content.style.display === "block") {
-                content.style.display = "none";
+            // Проверяем, скрыт ли элемент в данный момент
+            if (content.style.getPropertyValue('display') === 'block') {
+                content.style.setProperty('display', 'none', 'important');
                 arrow.innerText = "▶";
             } else {
-                content.style.display = "block";
+                content.style.setProperty('display', 'block', 'important');
                 arrow.innerText = "▼";
             }
         }
