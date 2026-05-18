@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INGCO TOOLS - IZZA qurilish bozori</title>
+    <title>INGCO TOOLS - IZZA</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         body { background-color: #000; color: #fff; font-family: Arial, sans-serif; margin: 0; padding: 10px; }
         .header-banner { text-align: center; margin-bottom: 15px; }
-        .header-banner h2 { color: #ffbc00; margin: 5px 0; }
+        .header-banner img { width: 100%; border-radius: 8px; }
         .category-accordion { background-color: #1e1e1e; color: #fff; cursor: pointer; padding: 15px; width: 100%; border: none; text-align: left; margin-bottom: 8px; border-radius: 4px; border-left: 5px solid #ffbc00; display: flex; justify-content: space-between; }
         .category-panel { padding: 0 5px; display: none; margin-bottom: 15px; }
         .products-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -16,35 +16,30 @@
         .product-card img { width: 100%; height: 120px; object-fit: contain; background: #fff; border-radius: 6px; }
         .current-price { color: #ffbc00; font-weight: bold; }
         .buy-button { background-color: #ffbc00; border: none; padding: 8px; width: 100%; border-radius: 4px; font-weight: bold; margin-top: 5px; }
-        
-        /* Модальное окно */
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); }
-        .modal-content { background: #1e1e1e; margin: 15% auto; padding: 20px; border: 2px solid #ffbc00; width: 80%; border-radius: 10px; text-align: center; }
     </style>
 </head>
 <body>
 
 <div class="header-banner">
-    <h2>INGCO TOOLS</h2>
-    <p>OFFICIAL DISTRIBUTOR UZBEKISTAN</p>
+    <img src="960.jpg" alt="INGCO Banner">
 </div>
 
 <button class="category-accordion">🔋 БЕСПРОВОДНЫЕ ИНСТРУМЕНТЫ <span>▼</span></button>
 <div class="category-panel" style="display: block;">
     <div class="products-grid">
-        <div class="product-card" onclick="alert('Дрель-шуруповерт 20V 45Нм - 850,000 сум')">
+        <div class="product-card">
             <img src="cdli20453.webp" alt="Дрель">
             <h3>CDLI20453</h3>
             <div class="current-price">850,000 сум</div>
             <button class="buy-button">КУПИТЬ</button>
         </div>
-        <div class="product-card" onclick="alert('Цепная пила 8 - 775,000 сум')">
+        <div class="product-card">
             <img src="cgsli20882.webp" alt="Пила">
             <h3>CGSLI20882</h3>
             <div class="current-price">775,000 сум</div>
             <button class="buy-button">КУПИТЬ</button>
         </div>
-        <div class="product-card" onclick="alert('Реноватор CMLI20228 - 595,000 сум')">
+        <div class="product-card">
             <img src="972.webp" alt="Реноватор">
             <h3>CMLI20228</h3>
             <div class="current-price">595,000 сум</div>
