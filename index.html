@@ -3,48 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INGCO Official Store</title>
+    <title>INGCO Store</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        body { font-family: sans-serif; background: #111; color: #fff; margin: 0; padding: 0; }
-        .banner { margin: 12px; border: 1px solid #333; }
-        .banner img { width: 100%; display: block; }
-        .category-container { margin: 0 12px 8px 12px; }
-        .category-btn {
-            background: #222; color: #fff; width: 100%; padding: 15px; font-size: 11px; font-weight: bold;
-            text-align: left; border: 1px solid #333; border-left: 5px solid #febd11;
-            cursor: pointer; display: flex; justify-content: space-between; align-items: center;
-        }
-        .content { display: none; padding: 10px; background: #1a1a1a; border: 1px solid #333; }
-        .item-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #333; font-size: 13px; }
+        body { font-family: sans-serif; background: #121212; color: #fff; margin: 0; padding: 10px; }
+        .cat { background: #1e1e1e; margin-bottom: 8px; border-radius: 6px; overflow: hidden; border: 1px solid #333; }
+        .btn { width: 100%; padding: 15px; background: #252525; border: none; color: #ffcc00; text-align: left; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; }
+        .list { display: none; padding: 10px; background: #1a1a1a; }
+        .row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #333; font-size: 13px; }
     </style>
 </head>
 <body>
-    <div class="banner"><img src="960.jpg" alt="INGCO"></div>
-    
-    <div class="category-container">
-        <button class="category-btn" onclick="toggle(this)">🛠 РУЧНЫЕ ИНСТРУМЕНТЫ <span>▶</span></button>
-        <div class="content">
-            <div class="item-row"><span>Плоскогубцы 200мм</span> <b>65,000 сум</b></div>
-        </div>
-    </div>
-
-    <div class="category-container">
-        <button class="category-btn" onclick="toggle(this)">🔌 ЭЛЕКТРОИНСТРУМЕНТЫ <span>▶</span></button>
-        <div class="content">
-            <div class="item-row"><span>Болгарка AG9508</span> <b>480,000 сум</b></div>
-            <div class="item-row"><span>Дрель ID5008</span> <b>350,000 сум</b></div>
-        </div>
-    </div>
-
+    <div id="catalog"></div>
     <script>
-        window.Telegram.WebApp.expand();
-        function toggle(btn) {
-            let content = btn.nextElementSibling;
-            let arrow = btn.querySelector('span');
-            content.style.display = (content.style.display === "block") ? "none" : "block";
-            arrow.innerText = (content.style.display === "block") ? "▼" : "▶";
+        const data = {
+            "🛠 РУЧНЫЕ ИНСТРУМЕНТЫ": ["Плоскогубцы - 65 000 сум", "Молоток - 45 000 сум"],
+            "⚡ ЭЛЕКТРОИНСТРУМЕНТЫ": ["Болгарка AG9508 - 480 000 сум", "Дрель ID5008 - 350 000 сум"],
+            "🔋 АККУМУЛЯТОРНЫЕ": ["Шуруповерт 20V - 750 000 сум"],
+            "⚙ ГЕНЕРАТОРЫ": ["Бензиновый 2.5кВт - 3 200 000 сум"]
+        };
+        const catDiv = document.getElementById('catalog');
+        for (let name in data) {
+            catDiv.innerHTML += `<div class="cat"><button class="btn" onclick="t(this)">${name} <span>▶</span></button><div class="list">${data[name].map(i => `<div class="row">${i}</div>`).join('')}</div></div>`;
         }
+        function t(b) {
+            let l = b.nextElementSibling;
+            let s = b.querySelector('span');
+            l.style.display = (l.style.display === "block") ? "none" : "block";
+            s.innerText = (l.style.display === "block") ? "▼" : "▶";
+        }
+        window.Telegram.WebApp.expand();
     </script>
 </body>
 </html>
