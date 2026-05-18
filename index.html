@@ -10,255 +10,50 @@
         header { text-align: center; padding: 15px 0; background: #000; border-bottom: 3px solid #febd11; }
         header h1 { color: #febd11; margin: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 2px; font-weight: 900; }
         header p { margin: 3px 0 0 0; font-size: 10px; color: #888; text-transform: uppercase; }
-        
         .banner { margin: 12px; border-radius: 4px; box-shadow: 0 4px 15px rgba(254, 189, 17, 0.2); overflow: hidden; border: 1px solid #333; }
         .banner img { width: 100%; height: auto; display: block; }
-
         .lang-notice { text-align: center; font-size: 10px; color: #666; margin: 10px 0; text-transform: uppercase; }
-
         .category-container { margin: 0 12px 8px 12px; }
-        .category-btn {
-            background: #222; color: #fff; width: 100%; padding: 14px; font-size: 11px; font-weight: 700;
-            text-align: left; border: 1px solid #333; border-left: 4px solid #febd11;
-            cursor: pointer; display: flex; justify-content: space-between; align-items: center; text-transform: uppercase;
-        }
-        .category-btn:active { background: #2a2a2a; }
-        .category-btn .arrow { color: #febd11; font-size: 10px; transition: transform 0.2s; }
-
-        /* ИСПРАВЛЕНО: Жестко скрываем контент изначально */
+        .category-btn { background: #222; color: #fff; width: 100%; padding: 14px; font-size: 11px; font-weight: 700; text-align: left; border: 1px solid #333; border-left: 4px solid #febd11; cursor: pointer; display: flex; justify-content: space-between; align-items: center; text-transform: uppercase; }
         .category-content { display: none !important; background: #161616; padding: 12px 6px; border: 1px solid #333; border-top: none; }
-        
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         .card { background: #1f1f1f; padding: 10px; border: 1px solid #2a2a2a; display: flex; flex-direction: column; justify-content: space-between; position: relative; border-radius: 4px; }
-        
         .badge { position: absolute; top: 5px; right: 5px; background: #e62e2d; color: #fff; font-size: 8px; font-weight: bold; padding: 2px 5px; border-radius: 3px; z-index: 10; text-transform: uppercase; }
-
-        .card .img-container { 
-            width: 100%; 
-            height: 140px; 
-            background: #ffffff; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            margin-bottom: 8px; 
-            overflow: hidden;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        .card .img-container img { 
-            width: 100%;
-            height: 100%;
-            object-fit: cover; 
-            display: block;
-        }
-        
-        .card .sku { font-size: 8px; color: #febd11; font-weight: bold; }
-        .card h3 { font-size: 11px; font-weight: 600; margin: 4px 0 2px 0; height: 32px; overflow: hidden; line-height: 1.3; color: #fff; }
-        
-        .card .description-box { font-size: 8px; color: #ccc; margin-bottom: 6px; line-height: 1.2; border-top: 1px solid #2a2a2a; padding-top: 4px; flex-grow: 1; }
-        .card .description-box .uz { color: #999; font-style: italic; margin-top: 2px; }
-
-        .price-box { margin: 5px 0; min-height: 24px; display: flex; flex-direction: column; justify-content: flex-end; }
-        .price-old { font-size: 9px; color: #666; text-decoration: line-through; margin-bottom: 1px; }
+        .img-container { width: 100%; height: 140px; background: #ffffff; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; overflow: hidden; border-radius: 4px; }
+        .img-container img { width: 100%; height: 100%; object-fit: cover; }
+        .sku { font-size: 8px; color: #febd11; font-weight: bold; }
+        .card h3 { font-size: 11px; font-weight: 600; margin: 4px 0 2px 0; height: 32px; overflow: hidden; color: #fff; }
+        .description-box { font-size: 8px; color: #ccc; margin-bottom: 6px; border-top: 1px solid #2a2a2a; padding-top: 4px; flex-grow: 1; }
         .price-current { font-weight: 700; color: #febd11; font-size: 12px; }
-        
         .btn { background: #febd11; color: #000; border: none; padding: 10px; font-weight: 700; font-size: 9px; text-transform: uppercase; width: 100%; border-radius: 3px; cursor: pointer; }
-        .btn:active { background: #c9960e; }
-        
-        .empty-msg { font-size: 10px; color: #555; text-align: center; padding: 20px; text-transform: uppercase; }
     </style>
 </head>
 <body>
-
-    <header>
-        <h1>INGCO TOOLS</h1>
-        <p>Official Distributor Uzbekistan</p>
-    </header>
-
-    <div class="banner">
-        <img src="distributor_banner.jpg" alt="INGCO Distributor">
-    </div>
-
+    <header><h1>INGCO TOOLS</h1><p>Official Distributor Uzbekistan</p></header>
+    <div class="banner"><img src="distributor_banner.jpg" alt="INGCO"></div>
     <div class="lang-notice">RU 🇷🇺 / UZ 🇺🇿 Текст</div>
-
-    <div class="category-container">
-        <button class="category-btn" onclick="toggleCategory(this, 'cat1')">
-            <span>🛠 Ручные инструменты / Қўл асбоблари</span>
-            <span class="arrow">▶</span>
-        </button>
-        <div id="cat1" class="category-content">
-            <div class="grid">
-                <div class="card">
-                    <div class="img-container"><img src="HCP08200.jpg" onerror="this.src='https://saidmurod82.github.io/shop/distributor_banner.jpg'"></div>
-                    <div class="sku">HCP08200</div>
-                    <h3>Плоскогубцы 200мм</h3>
-                    <div class="price-box">
-                        <div class="price-current">65,000 сум</div>
-                    </div>
-                    <button class="btn" onclick="orderProduct('Плоскогубцы HCP08200')">Купить / Сотиб олиш</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="category-container">
-        <button class="category-btn" onclick="toggleCategory(this, 'cat2')">
-            <span>🔌 Электроинструменты / Электр асбоблар</span>
-            <span class="arrow">▶</span>
-        </button>
-        <div id="cat2" class="category-content">
-            <div class="grid">
-                <div class="card">
-                    <div class="img-container"><img src="AG9508.jpg" onerror="this.src='https://saidmurod82.github.io/shop/distributor_banner.jpg'"></div>
-                    <div class="sku">AG9508</div>
-                    <h3>Болгарка 950W</h3>
-                    <div class="price-box">
-                        <div class="price-current">480,000 сум</div>
-                    </div>
-                    <button class="btn" onclick="orderProduct('Болгарка AG9508')">Купить / Сотиб олиш</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="category-container">
         <button class="category-btn" onclick="toggleCategory(this, 'cat3')">
-            <span>🔋 Беспроводные инструменты / Симсиз асбоблар</span>
-            <span class="arrow">▶</span>
+            <span>🔋 Беспроводные инструменты</span><span class="arrow">▶</span>
         </button>
         <div id="cat3" class="category-content">
             <div class="grid">
                 <div class="card">
-                    <div class="img-container"><img src="CDLI20453.jpg" onerror="this.src='https://saidmurod82.github.io/shop/distributor_banner.jpg'"></div>
+                    <div class="img-container"><img src="CDLI20453.jpg"></div>
                     <div class="sku">CDLI20453</div>
-                    <h3>Дрель-шуруповерт 20V 45Нм</h3>
-                    <div class="description-box">
-                        <div class="ru"><b>RU:</b> 45Нм, P20S, блок шпинделя, кейс, 2 аккумулятора 2.0Ач + зарядка.</div>
-                        <div class="uz"><b>UZ:</b> 45Нм, P20S, шпиндель блокировкаси, кейс, 2 та аккумулятор 2.0Ач + зарядка.</div>
-                    </div>
-                    <div class="price-box">
-                        <div class="price-current">850,000 сум</div>
-                    </div>
-                    <button class="btn" onclick="orderProduct('Шуруповерт CDLI20453 45Нм')">Купить / Сотиб олиш</button>
-                </div>
-
-                <div class="card">
-                    <div class="badge">Скидка 11%</div>
-                    <div class="img-container"><img src="CGSLI20882.jpg" onerror="this.src='https://saidmurod82.github.io/shop/distributor_banner.jpg'"></div>
-                    <div class="sku">CGSLI20882</div>
-                    <h3>Аккумуляторная цепная пила 8"</h3>
-                    <div class="description-box">
-                        <div class="ru"><b>RU:</b> Бесщеточный двигатель, 20V, шина 20см, 11м/с, автосмазка, 2 АКБ 2.0Ач, кейс.</div>
-                        <div class="uz"><b>UZ:</b> Чўткасиз мотор, 20V, шина 20см, 11м/с, автомойлаш, 2 та АКБ 2.0Ач, кейс.</div>
-                    </div>
-                    <div class="price-box">
-                        <div class="price-old">870,000 сум</div>
-                        <div class="price-current">775,000 сум</div>
-                    </div>
-                    <button class="btn" onclick="orderProduct('Мини-пила CGSLI20882 со скидкой')">Купить / Сотиб олиш</button>
-                </div>
-
-                <div class="card">
-                    <div class="badge">Скидка 15%</div>
-                    <div class="img-container"><img src="CMLI20228.jpg" onerror="this.src='https://saidmurod82.github.io/shop/distributor_banner.jpg'"></div>
-                    <div class="sku">CMLI20228</div>
-                    <h3>Реноватор многофункциональный</h3>
-                    <div class="description-box">
-                        <div class="ru"><b>RU:</b> 20V, 5000-20000 об/мин, 6 скоростей, угол 3.2°, насадки, 1 АКБ 2.0Ач, кейс.</div>
-                        <div class="uz"><b>UZ:</b> 20V, 5000-20000 айл/мин, 6 тезлик, бурчак 3.2°, насадкалар, 1 АКБ 2.0Ач, кейс.</div>
-                    </div>
-                    <div class="price-box">
-                        <div class="price-old">700,000 сум</div>
-                        <div class="price-current">595,000 сум</div>
-                    </div>
-                    <button class="btn" onclick="orderProduct('Реноватор CMLI20228 со скидкой')">Купить / Сотиб олиш</button>
+                    <h3>Дрель-шуруповерт</h3>
+                    <div class="price-current">850,000 сум</div>
+                    <button class="btn" onclick="orderProduct('Шуруповерт CDLI20453')">Купить</button>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="category-container">
-        <button class="category-btn" onclick="toggleCategory(this, 'cat4')">
-            <span>⚡️ Аккумуляторные инструменты 42V</span>
-            <span class="arrow">▶</span>
-        </button>
-        <div id="cat4" class="category-content">
-            <div class="empty-msg">Товары скоро будут добавлены / Тез орада қўшилади</div>
-        </div>
-    </div>
-
-    <div class="category-container">
-        <button class="category-btn" onclick="toggleCategory(this, 'cat5')">
-            <span>📏 Измерительные инструменты / Ўлчов асбоблари</span>
-            <span class="arrow">▶</span>
-        </button>
-        <div id="cat5" class="category-content">
-            <div class="empty-msg">Товары скоро будут добавлены / Тез орада қўшилади</div>
-        </div>
-    </div>
-
-    <div class="category-container">
-        <button class="category-btn" onclick="toggleCategory(this, 'cat6')">
-            <span>💨 Пневматические инструменты / Пневматик асбоблар</span>
-            <span class="arrow">▶</span>
-        </button>
-        <div id="cat6" class="category-content">
-            <div class="empty-msg">Товары скоро будут добавлены / Тез орада қўшилади</div>
-        </div>
-    </div>
-
-    <div class="category-container">
-        <button class="category-btn" onclick="toggleCategory(this, 'cat7')">
-            <span>🌳 Садовые инструменты / Боғ асбоблари</span>
-            <span class="arrow">▶</span>
-        </button>
-        <div id="cat7" class="category-content">
-            <div class="grid">
-                <div class="card">
-                    <div class="img-container"><img src="CGSLI20662.jpg" onerror="this.src='https://saidmurod82.github.io/shop/distributor_banner.jpg'"></div>
-                    <div class="sku">CGSLI20662</div>
-                    <h3>Мини-пила 20V</h3>
-                    <div class="price-box">
-                        <div class="price-current">970,000 сум</div>
-                    </div>
-                    <button class="btn" onclick="orderProduct('Мини-пила CGSLI20662')">Купить / Сотиб олиш</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="category-container">
-        <button class="category-btn" onclick="toggleCategory(this, 'cat8')">
-            <span>⚡️ Генераторы / Генераторлар</span>
-            <span class="arrow">▶</span>
-        </button>
-        <div id="cat8" class="category-content">
-            <div class="empty-msg">Товары скоро будут добавлены / Тез орада қўшилади</div>
-        </div>
-    </div>
-
     <script>
         let tg = window.Telegram.WebApp;
-        tg.expand(); 
-
-        // ИСПРАВЛЕНО: Принудительно закрываем все категории скриптом сразу при загрузке страницы
-        document.addEventListener("DOMContentLoaded", function() {
-            let contents = document.querySelectorAll('.category-content');
-            contents.forEach(function(content) {
-                content.style.setProperty('display', 'none', 'important');
-            });
-            let arrows = document.querySelectorAll('.arrow');
-            arrows.forEach(function(arrow) {
-                arrow.innerText = "▶";
-            });
-        });
-
-        // ИСПРАВЛЕНО: Четкое управление разворачиванием/сворачиванием
+        tg.expand();
         function toggleCategory(btn, id) {
             let content = document.getElementById(id);
             let arrow = btn.querySelector('.arrow');
-            
-            // Проверяем, скрыт ли элемент в данный момент
             if (content.style.getPropertyValue('display') === 'block') {
                 content.style.setProperty('display', 'none', 'important');
                 arrow.innerText = "▶";
@@ -267,11 +62,7 @@
                 arrow.innerText = "▼";
             }
         }
-
-        function orderProduct(name) {
-            tg.sendData("order:" + name); 
-            tg.close();
-        }
+        function orderProduct(name) { tg.sendData("order:" + name); tg.close(); }
     </script>
 </body>
 </html>
