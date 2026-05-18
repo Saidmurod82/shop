@@ -2,42 +2,65 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>INGCO Official Store</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        body { font-family: 'Segoe UI', Arial, sans-serif; background: #111; color: #fff; margin: 0; padding: 0; padding-bottom: 30px; }
-        header { text-align: center; padding: 15px 0; border-bottom: 3px solid #febd11; }
-        header h1 { color: #febd11; margin: 0; font-size: 22px; text-transform: uppercase; }
-        .banner { margin: 12px; border-radius: 4px; overflow: hidden; border: 1px solid #333; }
+        body { font-family: sans-serif; background: #111; color: #fff; margin: 0; padding: 0; }
+        .banner { margin: 12px; border: 1px solid #333; }
         .banner img { width: 100%; display: block; }
-        .lang-notice { text-align: center; font-size: 10px; color: #666; margin-bottom: 15px; text-transform: uppercase; }
         .category-container { margin: 0 12px 8px 12px; }
         .category-btn {
             background: #222; color: #fff; width: 100%; padding: 15px; font-size: 11px; font-weight: bold;
             text-align: left; border: 1px solid #333; border-left: 5px solid #febd11;
-            cursor: pointer; display: flex; justify-content: space-between; align-items: center; text-transform: uppercase;
+            cursor: pointer; display: flex; justify-content: space-between;
         }
+        .content { display: none; padding: 10px; background: #1a1a1a; border: 1px solid #333; }
     </style>
 </head>
 <body>
+    <div class="banner"><img src="960.jpg" alt="INGCO"></div>
+    
+    <div class="category-container">
+        <button class="category-btn" onclick="toggle(this)">🛠 РУЧНЫЕ ИНСТРУМЕНТЫ / ҚЎЛ АСБОБЛАРИ <span>▶</span></button>
+        <div class="content">Товары будут добавлены...</div>
+    </div>
+    <div class="category-container">
+        <button class="category-btn" onclick="toggle(this)">🔌 ЭЛЕКТРОИНСТРУМЕНТЫ / ЭЛЕКТР АСБОБЛАР <span>▶</span></button>
+        <div class="content">Товары будут добавлены...</div>
+    </div>
+    <div class="category-container">
+        <button class="category-btn" onclick="toggle(this)">🔋 БЕСПРОВОДНЫЕ ИНСТРУМЕНТЫ / СИМСИЗ АСБОБЛАР <span>▶</span></button>
+        <div class="content">Товары будут добавлены...</div>
+    </div>
+    <div class="category-container">
+        <button class="category-btn" onclick="toggle(this)">⚡ АККУМУЛЯТОРНЫЕ ИНСТРУМЕНТЫ 42V <span>▶</span></button>
+        <div class="content">Товары будут добавлены...</div>
+    </div>
+    <div class="category-container">
+        <button class="category-btn" onclick="toggle(this)">📏 ИЗМЕРИТЕЛЬНЫЕ ИНСТРУМЕНТЫ / ЎЛЧОВ АСБОБЛАРИ <span>▶</span></button>
+        <div class="content">Товары будут добавлены...</div>
+    </div>
+    <div class="category-container">
+        <button class="category-btn" onclick="toggle(this)">💨 ПНЕВМАТИЧЕСКИЕ ИНСТРУМЕНТЫ / ПНЕВМАТИК АСБОБЛАР <span>▶</span></button>
+        <div class="content">Товары будут добавлены...</div>
+    </div>
+    <div class="category-container">
+        <button class="category-btn" onclick="toggle(this)">🌳 САДОВЫЕ ИНСТРУМЕНТЫ / БОҒ АСБОБЛАРИ <span>▶</span></button>
+        <div class="content">Товары будут добавлены...</div>
+    </div>
+    <div class="category-container">
+        <button class="category-btn" onclick="toggle(this)">⚡ ГЕНЕРАТОРЫ / ГЕНЕРАТОРЛАР <span>▶</span></button>
+        <div class="content">Товары будут добавлены...</div>
+    </div>
 
-<header><h1>INGCO TOOLS</h1><p style="font-size: 10px; color: #888;">OFFICIAL DISTRIBUTOR UZBEKISTAN</p></header>
-
-<div class="banner"><img src="960.jpg" alt="INGCO Banner"></div>
-<div class="lang-notice">RU 🇷🇺 / UZ 🇺🇿 ТЕКСТ</div>
-
-<div class="category-container"><button class="category-btn">🛠 РУЧНЫЕ ИНСТРУМЕНТЫ / ҚЎЛ АСБОБЛАРИ <span>▶</span></button></div>
-<div class="category-container"><button class="category-btn">🔌 ЭЛЕКТРОИНСТРУМЕНТЫ / ЭЛЕКТР АСБОБЛАР <span>▶</span></button></div>
-<div class="category-container"><button class="category-btn">🔋 БЕСПРОВОДНЫЕ ИНСТРУМЕНТЫ / СИМСИЗ АСБОБЛАР <span>▶</span></button></div>
-<div class="category-container"><button class="category-btn">⚡ АККУМУЛЯТОРНЫЕ ИНСТРУМЕНТЫ 42V <span>▶</span></button></div>
-<div class="category-container"><button class="category-btn">📏 ИЗМЕРИТЕЛЬНЫЕ ИНСТРУМЕНТЫ / ЎЛЧОВ АСБОБЛАРИ <span>▶</span></button></div>
-<div class="category-container"><button class="category-btn">💨 ПНЕВМАТИЧЕСКИЕ ИНСТРУМЕНТЫ / ПНЕВМАТИК АСБОБЛАР <span>▶</span></button></div>
-<div class="category-container"><button class="category-btn">🌳 САДОВЫЕ ИНСТРУМЕНТЫ / БОҒ АСБОБЛАРИ <span>▶</span></button></div>
-<div class="category-container"><button class="category-btn">⚡ ГЕНЕРАТОРЫ / ГЕНЕРАТОРЛАР <span>▶</span></button></div>
-
-<script>
-    window.Telegram.WebApp.expand();
-</script>
+    <script>
+        window.Telegram.WebApp.expand();
+        function toggle(btn) {
+            let content = btn.nextElementSibling;
+            let arrow = btn.querySelector('span');
+            content.style.display = (content.style.display === "block") ? "none" : "block";
+            arrow.innerText = (content.style.display === "block") ? "▼" : "▶";
+        }
+    </script>
 </body>
 </html>
