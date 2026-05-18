@@ -1,3 +1,4 @@
+cat << 'EOF' > index.html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -6,54 +7,331 @@
     <title>INGCO TOOLS - IZZA</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        body { background-color: #000; color: #fff; font-family: Arial, sans-serif; margin: 0; padding: 10px; }
-        .header-banner { text-align: center; margin-bottom: 15px; }
-        .header-banner img { width: 100%; border-radius: 8px; }
-        .category-accordion { background-color: #1e1e1e; color: #fff; cursor: pointer; padding: 15px; width: 100%; border: none; text-align: left; margin-bottom: 8px; border-radius: 4px; border-left: 5px solid #ffbc00; display: flex; justify-content: space-between; }
-        .category-panel { padding: 0 5px; display: none; margin-bottom: 15px; }
-        .products-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .product-card { background-color: #1e1e1e; border: 1px solid #333; border-radius: 8px; padding: 10px; text-align: center; cursor: pointer; }
-        .product-card img { width: 100%; height: 120px; object-fit: contain; background: #fff; border-radius: 6px; }
-        .current-price { color: #ffbc00; font-weight: bold; }
-        .buy-button { background-color: #ffbc00; border: none; padding: 8px; width: 100%; border-radius: 4px; font-weight: bold; margin-top: 5px; }
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #0b0b0b;
+            color: #ffffff;
+            margin: 0;
+            padding: 10px;
+        }
+
+        /* Шапка каталога */
+        .brand-header {
+            text-align: center;
+            padding: 15px 10px;
+            background-color: #000000;
+            border-bottom: 2px solid #ffbc00;
+            margin-bottom: 10px;
+        }
+        .brand-title {
+            color: #ffbc00;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin: 0;
+        }
+        .brand-subtitle {
+            color: #aaaaaa;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 5px;
+        }
+
+        /* Главный баннер с рабочим */
+        .main-banner {
+            width: 100%;
+            border-radius: 4px;
+            border: 1px solid #ffbc00;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        /* Переключатель языка под баннером */
+        .lang-selector {
+            text-align: center;
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        /* Категории */
+        .menu-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .menu-item {
+            background-color: #1a1a1a;
+            border-left: 4px solid #ffbc00;
+            padding: 16px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+        .menu-item-text {
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .menu-item-arrow {
+            color: #ffbc00;
+            font-size: 10px;
+        }
+
+        /* СЕТКА ТОВАРОВ (В точности как на скриншоте) */
+        .products-grid {
+            display: none; /* Скрыта, пока не нажали на категорию */
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            padding: 10px 0;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Карточка товара */
+        .product-card {
+            background-color: #1a1a1a;
+            border-radius: 4px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Бейджик скидки */
+        .discount-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #e63946;
+            color: #fff;
+            font-size: 9px;
+            font-weight: bold;
+            padding: 3px 6px;
+            border-radius: 3px;
+            z-index: 10;
+        }
+
+        /* Картинка товара */
+        .product-img-box {
+            width: 100%;
+            background-color: #ffffff;
+            border-radius: 2px;
+            position: relative;
+            margin-bottom: 8px;
+        }
+        .product-img-box img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Тексты в карточке */
+        .product-code {
+            color: #ffbc00;
+            font-size: 10px;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        .product-title {
+            font-size: 12px;
+            font-weight: bold;
+            margin: 0 0 8px 0;
+            line-height: 1.3;
+        }
+        .product-desc {
+            font-size: 10px;
+            color: #aaaaaa;
+            line-height: 1.4;
+            margin-bottom: 10px;
+        }
+        .product-desc span {
+            color: #888;
+            font-weight: bold;
+        }
+
+        /* Цены */
+        .old-price {
+            font-size: 11px;
+            color: #555555;
+            text-decoration: line-through;
+            margin-bottom: 2px;
+        }
+        .current-price {
+            font-size: 14px;
+            color: #ffbc00;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        /* Кнопка КУПИТЬ */
+        .buy-btn {
+            background-color: #ffbc00;
+            color: #000000;
+            border: none;
+            width: 100%;
+            padding: 10px 0;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-top: auto;
+        }
+        .buy-btn:active {
+            background-color: #e0a500;
+        }
     </style>
 </head>
 <body>
 
-<div class="header-banner">
-    <img src="960.jpg" alt="INGCO Banner">
-</div>
-
-<button class="category-accordion">🔋 БЕСПРОВОДНЫЕ ИНСТРУМЕНТЫ <span>▼</span></button>
-<div class="category-panel" style="display: block;">
-    <div class="products-grid">
-        <div class="product-card">
-            <img src="cdli20453.webp" alt="Дрель">
-            <h3>CDLI20453</h3>
-            <div class="current-price">850,000 сум</div>
-            <button class="buy-button">КУПИТЬ</button>
-        </div>
-        <div class="product-card">
-            <img src="cgsli20882.webp" alt="Пила">
-            <h3>CGSLI20882</h3>
-            <div class="current-price">775,000 сум</div>
-            <button class="buy-button">КУПИТЬ</button>
-        </div>
-        <div class="product-card">
-            <img src="972.webp" alt="Реноватор">
-            <h3>CMLI20228</h3>
-            <div class="current-price">595,000 сум</div>
-            <button class="buy-button">КУПИТЬ</button>
-        </div>
+    <div class="brand-header">
+        <div class="brand-title">INGCO TOOLS</div>
+        <div class="brand-subtitle">Official Distributor Uzbekistan</div>
     </div>
-</div>
 
-<script>
-    const acc = document.getElementsByClassName("category-accordion");
-    acc[0].addEventListener("click", function() {
-        const panel = this.nextElementSibling;
-        panel.style.display = (panel.style.display === "block") ? "none" : "block";
-    });
-</script>
+    <img class="main-banner" src="https://saidmurod82.github.io/shop/banner.jpg" alt="INGCO Banner" onerror="this.style.display='none'">
+
+    <div class="lang-selector">RU 🇷🇺 / UZ 🇺🇿 ТЕКСТ</div>
+
+    <div class="menu-container">
+        
+        <div class="menu-item" onclick="toggleCategory('ручные')">
+            <span class="menu-item-text">🛠️ РУЧНЫЕ ИНСТРУМЕНТЫ / ҚЎЛ АСБОБЛАРИ</span>
+            <span class="menu-item-arrow" id="arrow-ручные">▶</span>
+        </div>
+        <div class="products-grid" id="cat-ручные">
+            </div>
+
+        <div class="menu-item" onclick="toggleCategory('электро')">
+            <span class="menu-item-text">🔌 ЭЛЕКТРОИНСТРУМЕНТЫ / ЭЛЕКТР АСБОБЛАР</span>
+            <span class="menu-item-arrow" id="arrow-электро">▶</span>
+        </div>
+        <div class="products-grid" id="cat-электро">
+            </div>
+
+        <div class="menu-item" onclick="toggleCategory('беспроводные')">
+            <span class="menu-item-text">🔋 БЕСПРОВОДНЫЕ ИНСТРУМЕНТЫ / СИМСИЗ АСБОБЛАР</span>
+            <span class="menu-item-arrow" id="arrow-беспроводные">▶</span>
+        </div>
+        
+        <div class="products-grid" id="cat-беспроводные" style="display: grid;">
+            
+            <div class="product-card">
+                <div class="product-img-box">
+                    <img src="https://saidmurod82.github.io/shop/cdli20453.jpg" alt="CDLI20453" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23eee%22/><text x=%2250%%22 y=%2250%%22 font-size=%2210%22 text-anchor=%22middle%22 fill=%22%23aaa%22>INGCO IMAGE</text></svg>'">
+                </div>
+                <div class="product-code">CDLI20453</div>
+                <div class="product-title">Дрель-шуруповерт 20V 45Нм</div>
+                <div class="product-desc">
+                    <span>RU:</span> 45Нм, P2S, блок шпинделя, кейс, 2 аккумулятора 2.0Ач + зарядка.<br>
+                    <span>UZ:</span> 45Nm, P2S, шпиндель блокировкаси, кейс, 2 та аккумулятор 2.0Ач + зарядка.
+                </div>
+                <div class="old-price">&nbsp;</div>
+                <div class="current-price">850,000 сум</div>
+                <button class="buy-btn" onclick="buyProduct('Дрель-шуруповерт CDLI20453')">КУПИТЬ / SOTIB OLISH</button>
+            </div>
+
+            <div class="product-card">
+                <div class="discount-badge">СКИДКА 11%</div>
+                <div class="product-img-box">
+                    <img src="https://saidmurod82.github.io/shop/cgsli20882.jpg" alt="CGSLI20882" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23eee%22/><text x=%2250%%22 y=%2250%%22 font-size=%2210%22 text-anchor=%22middle%22 fill=%22%23aaa%22>INGCO IMAGE</text></svg>'">
+                </div>
+                <div class="product-code">CGSLI20882</div>
+                <div class="product-title">Аккумуляторная цепная пила 8"</div>
+                <div class="product-desc">
+                    <span>RU:</span> Бесщеточный двигатель, 20V, шина 20см, 11м/с, автосмазка, 2 АКБ 2.0Ач, кейс.<br>
+                    <span>UZ:</span> Чўткасиз мотор, 20V, шина 20см, 11м/с, автомойлаш, 2 та АКБ 2.0Ач, кейс.
+                </div>
+                <div class="old-price">970,000 сум</div>
+                <div class="current-price">775,000 сум</div>
+                <button class="buy-btn" onclick="buyProduct('Цепная пила CGSLI20882')">КУПИТЬ / SOTIB OLISH</button>
+            </div>
+
+            <div class="product-card">
+                <div class="discount-badge">СКИДКА 15%</div>
+                <div class="product-img-box">
+                    <img src="https://saidmurod82.github.io/shop/cmli20228.jpg" alt="CMLI20228" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23eee%22/><text x=%2250%%22 y=%2250%%22 font-size=%2210%22 text-anchor=%22middle%22 fill=%22%23aaa%22>INGCO IMAGE</text></svg>'">
+                </div>
+                <div class="product-code">CMLI20228</div>
+                <div class="product-title">Реноватор многофункциональный</div>
+                <div class="product-desc">
+                    <span>RU:</span> 20V, 5000-20000 об/мин, 6 скоростей, угол 3.2°, насадки, 1 АКБ 2.0Ач, кейс.<br>
+                    <span>UZ:</span> 20V, 5000-20000 айл/мин, 6 тезлик, бурчак 3.2°, насадкалар, 1 АКБ 2.0Ач, кейс.
+                </div>
+                <div class="old-price">700,000 сум</div>
+                <div class="current-price">595,000 сум</div>
+                <button class="buy-btn" onclick="buyProduct('Реноватор CMLI20228')">КУПИТЬ / SOTIB OLISH</button>
+            </div>
+
+        </div>
+
+        <div class="menu-item" onclick="toggleCategory('аккум42')">
+            <span class="menu-item-text">⚡ АККУМУЛЯТОРНЫЕ ИНСТРУМЕНТЫ 42V</span>
+            <span class="menu-item-arrow" id="arrow-аккум42">▶</span>
+        </div>
+        <div class="products-grid" id="cat-аккум42"></div>
+
+        <div class="menu-item" onclick="toggleCategory('измерительные')">
+            <span class="menu-item-text">📐 ИЗМЕРИТЕЛЬНЫЕ ИНСТРУМЕНТЫ / ЎЛЧОВ АСБОБЛАРИ</span>
+            <span class="menu-item-arrow" id="arrow-измерительные">▶</span>
+        </div>
+        <div class="products-grid" id="cat-измерительные"></div>
+
+        <div class="menu-item" onclick="toggleCategory('пневмо')">
+            <span class="menu-item-text">💎 ПНЕВМАТИЧЕСКИЕ ИНСТРУМЕНТЫ / ПНЕВМАТИК АСБОБЛАР</span>
+            <span class="menu-item-arrow" id="arrow-пневмо">▶</span>
+        </div>
+        <div class="products-grid" id="cat-пневмо"></div>
+
+        <div class="menu-item" onclick="toggleCategory('садовые')">
+            <span class="menu-item-text">🌳 САДОВЫЕ ИНСТРУМЕНТЫ / БОҒ АСБОБЛАРИ</span>
+            <span class="menu-item-arrow" id="arrow-садовые">▶</span>
+        </div>
+        <div class="products-grid" id="cat-садовые"></div>
+
+        <div class="menu-item" onclick="toggleCategory('генераторы')">
+            <span class="menu-item-text">⚡ ГЕНЕРАТОРЫ / ГЕНЕРАТОРЛАР</span>
+            <span class="menu-item-arrow" id="arrow-генераторы">▶</span>
+        </div>
+        <div class="products-grid" id="cat-генераторы"></div>
+
+    </div>
+
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.expand();
+
+        // Функция открытия/закрытия категорий (аккордеон)
+        function toggleCategory(catId) {
+            const grid = document.getElementById('cat-' + catId);
+            const arrow = document.getElementById('arrow-' + catId);
+            
+            if (grid.style.display === 'grid') {
+                grid.style.display = 'none';
+                arrow.innerText = '▶';
+            } else {
+                grid.style.display = 'grid';
+                arrow.innerText = '▼';
+            }
+        }
+
+        // При нажатии кнопки КУПИТЬ
+        function buyProduct(productName) {
+            tg.sendData("Заказ: " + productName);
+            tg.close();
+        }
+    </script>
 </body>
 </html>
+EOF
