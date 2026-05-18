@@ -6,63 +6,38 @@
     <title>INGCO Official Store</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        body { font-family: 'Segoe UI', Arial, sans-serif; background: #111; color: #fff; margin: 0; padding: 0; padding-bottom: 30px; -webkit-user-select: none; }
-        header { text-align: center; padding: 15px 0; background: #000; border-bottom: 3px solid #febd11; }
-        header h1 { color: #febd11; margin: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 2px; font-weight: 900; }
-        header p { margin: 3px 0 0 0; font-size: 10px; color: #888; text-transform: uppercase; }
-        .banner { margin: 12px; border-radius: 4px; box-shadow: 0 4px 15px rgba(254, 189, 17, 0.2); overflow: hidden; border: 1px solid #333; }
-        .banner img { width: 100%; height: auto; display: block; }
-        .lang-notice { text-align: center; font-size: 10px; color: #666; margin: 10px 0; text-transform: uppercase; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #111; color: #fff; margin: 0; padding: 0; padding-bottom: 30px; }
+        header { text-align: center; padding: 15px 0; border-bottom: 3px solid #febd11; }
+        header h1 { color: #febd11; margin: 0; font-size: 22px; text-transform: uppercase; }
+        .banner { margin: 12px; border-radius: 4px; overflow: hidden; border: 1px solid #333; }
+        .banner img { width: 100%; display: block; }
+        .lang-notice { text-align: center; font-size: 10px; color: #666; margin-bottom: 15px; text-transform: uppercase; }
         .category-container { margin: 0 12px 8px 12px; }
-        .category-btn { background: #222; color: #fff; width: 100%; padding: 14px; font-size: 11px; font-weight: 700; text-align: left; border: 1px solid #333; border-left: 4px solid #febd11; cursor: pointer; display: flex; justify-content: space-between; align-items: center; text-transform: uppercase; }
-        .category-content { display: none !important; background: #161616; padding: 12px 6px; border: 1px solid #333; border-top: none; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .card { background: #1f1f1f; padding: 10px; border: 1px solid #2a2a2a; display: flex; flex-direction: column; justify-content: space-between; position: relative; border-radius: 4px; }
-        .badge { position: absolute; top: 5px; right: 5px; background: #e62e2d; color: #fff; font-size: 8px; font-weight: bold; padding: 2px 5px; border-radius: 3px; z-index: 10; text-transform: uppercase; }
-        .img-container { width: 100%; height: 140px; background: #ffffff; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; overflow: hidden; border-radius: 4px; }
-        .img-container img { width: 100%; height: 100%; object-fit: cover; }
-        .sku { font-size: 8px; color: #febd11; font-weight: bold; }
-        .card h3 { font-size: 11px; font-weight: 600; margin: 4px 0 2px 0; height: 32px; overflow: hidden; color: #fff; }
-        .description-box { font-size: 8px; color: #ccc; margin-bottom: 6px; border-top: 1px solid #2a2a2a; padding-top: 4px; flex-grow: 1; }
-        .price-current { font-weight: 700; color: #febd11; font-size: 12px; }
-        .btn { background: #febd11; color: #000; border: none; padding: 10px; font-weight: 700; font-size: 9px; text-transform: uppercase; width: 100%; border-radius: 3px; cursor: pointer; }
+        .category-btn {
+            background: #222; color: #fff; width: 100%; padding: 15px; font-size: 11px; font-weight: bold;
+            text-align: left; border: 1px solid #333; border-left: 5px solid #febd11;
+            cursor: pointer; display: flex; justify-content: space-between; align-items: center; text-transform: uppercase;
+        }
     </style>
 </head>
 <body>
-    <header><h1>INGCO TOOLS</h1><p>Official Distributor Uzbekistan</p></header>
-    <div class="banner"><img src="distributor_banner.jpg" alt="INGCO"></div>
-    <div class="lang-notice">RU 🇷🇺 / UZ 🇺🇿 Текст</div>
-    <div class="category-container">
-        <button class="category-btn" onclick="toggleCategory(this, 'cat3')">
-            <span>🔋 Беспроводные инструменты</span><span class="arrow">▶</span>
-        </button>
-        <div id="cat3" class="category-content">
-            <div class="grid">
-                <div class="card">
-                    <div class="img-container"><img src="CDLI20453.jpg"></div>
-                    <div class="sku">CDLI20453</div>
-                    <h3>Дрель-шуруповерт</h3>
-                    <div class="price-current">850,000 сум</div>
-                    <button class="btn" onclick="orderProduct('Шуруповерт CDLI20453')">Купить</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script>
-        let tg = window.Telegram.WebApp;
-        tg.expand();
-        function toggleCategory(btn, id) {
-            let content = document.getElementById(id);
-            let arrow = btn.querySelector('.arrow');
-            if (content.style.getPropertyValue('display') === 'block') {
-                content.style.setProperty('display', 'none', 'important');
-                arrow.innerText = "▶";
-            } else {
-                content.style.setProperty('display', 'block', 'important');
-                arrow.innerText = "▼";
-            }
-        }
-        function orderProduct(name) { tg.sendData("order:" + name); tg.close(); }
-    </script>
+
+<header><h1>INGCO TOOLS</h1><p style="font-size: 10px; color: #888;">OFFICIAL DISTRIBUTOR UZBEKISTAN</p></header>
+
+<div class="banner"><img src="960.jpg" alt="INGCO Banner"></div>
+<div class="lang-notice">RU 🇷🇺 / UZ 🇺🇿 ТЕКСТ</div>
+
+<div class="category-container"><button class="category-btn">🛠 РУЧНЫЕ ИНСТРУМЕНТЫ / ҚЎЛ АСБОБЛАРИ <span>▶</span></button></div>
+<div class="category-container"><button class="category-btn">🔌 ЭЛЕКТРОИНСТРУМЕНТЫ / ЭЛЕКТР АСБОБЛАР <span>▶</span></button></div>
+<div class="category-container"><button class="category-btn">🔋 БЕСПРОВОДНЫЕ ИНСТРУМЕНТЫ / СИМСИЗ АСБОБЛАР <span>▶</span></button></div>
+<div class="category-container"><button class="category-btn">⚡ АККУМУЛЯТОРНЫЕ ИНСТРУМЕНТЫ 42V <span>▶</span></button></div>
+<div class="category-container"><button class="category-btn">📏 ИЗМЕРИТЕЛЬНЫЕ ИНСТРУМЕНТЫ / ЎЛЧОВ АСБОБЛАРИ <span>▶</span></button></div>
+<div class="category-container"><button class="category-btn">💨 ПНЕВМАТИЧЕСКИЕ ИНСТРУМЕНТЫ / ПНЕВМАТИК АСБОБЛАР <span>▶</span></button></div>
+<div class="category-container"><button class="category-btn">🌳 САДОВЫЕ ИНСТРУМЕНТЫ / БОҒ АСБОБЛАРИ <span>▶</span></button></div>
+<div class="category-container"><button class="category-btn">⚡ ГЕНЕРАТОРЫ / ГЕНЕРАТОРЛАР <span>▶</span></button></div>
+
+<script>
+    window.Telegram.WebApp.expand();
+</script>
 </body>
 </html>
