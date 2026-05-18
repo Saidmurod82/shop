@@ -6,81 +6,45 @@
     <title>INGCO Official Store</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        body { font-family: 'Segoe UI', Arial, sans-serif; background: #111; color: #fff; margin: 0; padding: 0; padding-bottom: 30px; -webkit-user-select: none; }
-        header { text-align: center; padding: 15px 0; background: #000; border-bottom: 3px solid #febd11; }
-        header h1 { color: #febd11; margin: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 2px; font-weight: 900; }
-        header p { margin: 3px 0 0 0; font-size: 10px; color: #888; text-transform: uppercase; }
-        
-        .banner { margin: 12px; border-radius: 4px; box-shadow: 0 4px 15px rgba(254, 189, 17, 0.2); overflow: hidden; border: 1px solid #333; }
-        .banner img { width: 100%; height: auto; display: block; }
-        .lang-notice { text-align: center; font-size: 10px; color: #666; margin: 10px 0; text-transform: uppercase; }
-
+        body { font-family: sans-serif; background: #111; color: #fff; margin: 0; padding: 0; }
+        .banner { margin: 12px; border: 1px solid #333; }
+        .banner img { width: 100%; display: block; }
         .category-container { margin: 0 12px 8px 12px; }
         .category-btn {
-            background: #222; color: #fff; width: 100%; padding: 14px; font-size: 11px; font-weight: 700;
-            text-align: left; border: 1px solid #333; border-left: 4px solid #febd11;
-            cursor: pointer; display: flex; justify-content: space-between; align-items: center; text-transform: uppercase;
+            background: #222; color: #fff; width: 100%; padding: 15px; font-size: 11px; font-weight: bold;
+            text-align: left; border: 1px solid #333; border-left: 5px solid #febd11;
+            cursor: pointer; display: flex; justify-content: space-between; align-items: center;
         }
-        .arrow { color: #febd11; font-size: 10px; }
-
-        .category-content { display: none; background: #161616; padding: 12px 6px; border: 1px solid #333; border-top: none; }
-        
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .card { background: #1f1f1f; padding: 10px; border: 1px solid #2a2a2a; border-radius: 4px; }
-        .img-container { width: 100%; height: 120px; background: #fff; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; border-radius: 4px; overflow: hidden; }
-        .img-container img { max-width: 100%; max-height: 100%; object-fit: contain; }
-        .sku { font-size: 8px; color: #febd11; font-weight: bold; }
-        h3 { font-size: 11px; margin: 4px 0; color: #fff; height: 30px; overflow: hidden; }
-        .price-current { font-weight: 700; color: #febd11; font-size: 12px; margin: 5px 0; }
-        .btn { background: #febd11; color: #000; border: none; padding: 8px; font-weight: 700; font-size: 9px; width: 100%; border-radius: 3px; cursor: pointer; }
+        .content { display: none; padding: 10px; background: #1a1a1a; border: 1px solid #333; }
+        .item-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #333; font-size: 13px; }
     </style>
 </head>
 <body>
-
-<header>
-    <h1>INGCO TOOLS</h1>
-    <p>Official Distributor Uzbekistan</p>
-</header>
-
-<div class="banner"><img src="distributor_banner.jpg" alt="Banner"></div>
-<div class="lang-notice">RU 🇷🇺 / UZ 🇺🇿 Текст</div>
-
-<div class="category-container">
-    <button class="category-btn" onclick="toggle(this)">🛠 РУЧНЫЕ ИНСТРУМЕНТЫ <span class="arrow">▶</span></button>
-    <div class="category-content">
-        <div class="grid">
-            <div class="card">
-                <div class="img-container"><img src="HCP08200.jpg"></div>
-                <div class="sku">HCP08200</div>
-                <h3>Плоскогубцы 200мм</h3>
-                <div class="price-current">65,000 сум</div>
-                <button class="btn" onclick="orderProduct('Плоскогубцы')">КУПИТЬ</button>
-            </div>
+    <div class="banner"><img src="960.jpg" alt="INGCO"></div>
+    
+    <div class="category-container">
+        <button class="category-btn" onclick="toggle(this)">🔌 ЭЛЕКТРОИНСТРУМЕНТЫ <span>▶</span></button>
+        <div class="content">
+            <div class="item-row"><span>Болгарка AG9508</span> <b>480,000 сум</b></div>
+            <div class="item-row"><span>Дрель ID5008</span> <b>350,000 сум</b></div>
         </div>
     </div>
-</div>
 
-<script>
-    let tg = window.Telegram.WebApp;
-    tg.expand();
+    <div class="category-container">
+        <button class="category-btn" onclick="toggle(this)">🛠 РУЧНЫЕ ИНСТРУМЕНТЫ <span>▶</span></button>
+        <div class="content">
+            <div class="item-row"><span>Плоскогубцы 200мм</span> <b>65,000 сум</b></div>
+        </div>
+    </div>
 
-    function toggle(btn) {
-        let content = btn.nextElementSibling;
-        let arrow = btn.querySelector('.arrow');
-        
-        if (content.style.display === "block") {
-            content.style.display = "none";
-            arrow.innerText = "▶";
-        } else {
-            content.style.display = "block";
-            arrow.innerText = "▼";
+    <script>
+        window.Telegram.WebApp.expand();
+        function toggle(btn) {
+            let content = btn.nextElementSibling;
+            let arrow = btn.querySelector('span');
+            content.style.display = (content.style.display === "block") ? "none" : "block";
+            arrow.innerText = (content.style.display === "block") ? "▼" : "▶";
         }
-    }
-
-    function orderProduct(name) {
-        tg.sendData("order:" + name);
-        tg.close();
-    }
-</script>
+    </script>
 </body>
 </html>
