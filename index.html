@@ -28,13 +28,27 @@
 
         .category-content { display: none; background: #161616; padding: 12px 6px; border: 1px solid #333; border-top: none; }
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .card { background: #1f1f1f; padding: 10px; border: 1px solid #2a2a2a; display: flex; flex-direction: column; justify-content: space-between; }
+        .card { background: #1f1f1f; padding: 10px; border: 1px solid #2a2a2a; display: flex; flex-direction: column; justify-content: space-between; position: relative; }
+        
+        /* Метка скидки */
+        .badge { position: absolute; top: 5px; right: 5px; background: #e62e2d; color: #fff; font-size: 8px; font-weight: bold; padding: 2px 5px; border-radius: 3px; z-index: 10; text-transform: uppercase; }
+
         .card .img-container { width: 100%; height: 110px; background: #fff; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; }
         .card img { max-width: 90%; max-height: 90%; object-fit: contain; }
+        
         .card .sku { font-size: 8px; color: #febd11; font-weight: bold; }
-        .card h3 { font-size: 10px; margin: 4px 0; height: 28px; overflow: hidden; line-height: 1.3; }
-        .card .price { font-weight: 700; color: #febd11; font-size: 12px; margin: 5px 0; }
+        .card h3 { font-size: 10px; margin: 4px 0 2px 0; height: 28px; overflow: hidden; line-height: 1.3; color: #fff; }
+        
+        .card .description-box { font-size: 8px; color: #ccc; margin-bottom: 6px; line-height: 1.2; border-top: 1px solid #2a2a2a; padding-top: 4px; flex-grow: 1; }
+        .card .description-box .uz { color: #999; font-style: italic; margin-top: 2px; }
+
+        /* Блок цен со скидкой */
+        .price-box { margin: 5px 0; }
+        .price-old { font-size: 9px; color: #777; text-decoration: line-through; text-decoration-color: #000; margin-bottom: 1px; }
+        .price-current { font-weight: 700; color: #febd11; font-size: 11px; }
+        
         .btn { background: #febd11; color: #000; border: none; padding: 8px; font-weight: 700; font-size: 9px; text-transform: uppercase; width: 100%; }
+        .btn:active { background: #c9960e; }
         
         .empty-msg { font-size: 10px; color: #555; text-align: center; padding: 20px; text-transform: uppercase; }
     </style>
@@ -63,7 +77,9 @@
                     <div class="img-container"><img src="HCP08200.jpg"></div>
                     <div class="sku">HCP08200</div>
                     <h3>Плоскогубцы 200мм</h3>
-                    <div class="price">65,000 сум</div>
+                    <div class="price-box">
+                        <div class="price-current">65,000 сум</div>
+                    </div>
                     <button class="btn" onclick="orderProduct('Плоскогубцы HCP08200')">Купить / Сотиб олиш</button>
                 </div>
             </div>
@@ -81,7 +97,9 @@
                     <div class="img-container"><img src="AG9508.jpg"></div>
                     <div class="sku">AG9508</div>
                     <h3>Болгарка 950W</h3>
-                    <div class="price">480,000 сум</div>
+                    <div class="price-box">
+                        <div class="price-current">480,000 сум</div>
+                    </div>
                     <button class="btn" onclick="orderProduct('Болгарка AG9508')">Купить / Сотиб олиш</button>
                 </div>
             </div>
@@ -93,14 +111,36 @@
             <span>🔋 Беспроводные инструменты / Симсиз асбоблар</span>
             <span class="arrow">▶</span>
         </button>
-        <div id="cat3" class="category-content">
+        <div id="cat3" class="category-content" style="display: block;">
             <div class="grid">
                 <div class="card">
-                    <div class="img-container"><img src="CDLI200528.jpg"></div>
-                    <div class="sku">CDLI200528</div>
-                    <h3>Шуруповерт 20V (P20S)</h3>
-                    <div class="price">750,000 сум</div>
-                    <button class="btn" onclick="orderProduct('Шуруповерт CDLI200528')">Купить / Сотиб олиш</button>
+                    <div class="img-container"><img src="CDLI20453.jpg"></div>
+                    <div class="sku">CDLI20453</div>
+                    <h3>Дрель-шуруповерт 20V 45Нм</h3>
+                    <div class="description-box">
+                        <div class="ru"><b>RU:</b> 45Нм, P20S, блок шпинделя, кейс, 2 аккумулятора 2.0Ач + зарядка.</div>
+                        <div class="uz"><b>UZ:</b> 45Нм, P20S, шпиндель блокировкаси, кейс, 2 та аккумулятор 2.0Ач + зарядка.</div>
+                    </div>
+                    <div class="price-box">
+                        <div class="price-current">850,000 сум</div>
+                    </div>
+                    <button class="btn" onclick="orderProduct('Шуруповерт CDLI20453 45Нм')">Купить / Сотиб олиш</button>
+                </div>
+
+                <div class="card">
+                    <div class="badge">Скидка 11%</div>
+                    <div class="img-container"><img src="CGSLI20882.jpg"></div>
+                    <div class="sku">CGSLI20882</div>
+                    <h3>Аккумуляторная цепная пила 8"</h3>
+                    <div class="description-box">
+                        <div class="ru"><b>RU:</b> Бесщеточный двигатель, 20V, шина 20см, 11м/с, автосмазка, 2 АКБ 2.0Ач, кейс.</div>
+                        <div class="uz"><b>UZ:</b> Чўткасиз мотор, 20V, шина 20см, 11м/с, автомойлаш, 2 та АКБ 2.0Ач, кейс.</div>
+                    </div>
+                    <div class="price-box">
+                        <div class="price-old">870,000 сум</div>
+                        <div class="price-current">775,000 сум</div>
+                    </div>
+                    <button class="btn" onclick="orderProduct('Мини-пила CGSLI20882 со скидкой')">Купить / Сотиб олиш</button>
                 </div>
             </div>
         </div>
@@ -147,7 +187,9 @@
                     <div class="img-container"><img src="CGSLI20662.jpg"></div>
                     <div class="sku">CGSLI20662</div>
                     <h3>Мини-пила 20V</h3>
-                    <div class="price">970,000 сум</div>
+                    <div class="price-box">
+                        <div class="price-current">970,000 сум</div>
+                    </div>
                     <button class="btn" onclick="orderProduct('Мини-пила CGSLI20662')">Купить / Сотиб олиш</button>
                 </div>
             </div>
