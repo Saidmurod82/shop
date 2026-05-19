@@ -15,7 +15,9 @@
         .btn { width: 100%; padding: 15px; background: #252525; border: none; color: #fff; text-align: left; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; align-items: center;}
         .list { display: none; padding: 0; background: #1a1a1a; }
         .row { padding: 10px; border-bottom: 1px solid #333; display: flex; align-items: center; gap: 12px; }
-        .thumb { width: 50px; height: 50px; object-fit: contain; background: #111; border-radius: 4px; }
+        .thumb { width: 50px; height: 50px; object-fit: contain; background: #111; border-radius: 4px; border: 1px solid #333; }
+        .price { color: #ffcc00; font-size: 12px; }
+        .old-price { text-decoration: line-through; color: #888; font-size: 10px; }
     </style>
 </head>
 <body>
@@ -35,10 +37,10 @@
                 {name: "Отвертки", img: "https://via.placeholder.com/50"}
             ],
             "⚡ ЭЛЕКТРОИНСТРУМЕНТЫ": [
-                {name: "Шуруповерт CIDLI20558", img: "https://www.ingco.com/file/product/20240416/CIDLI20558.jpg"},
                 {name: "Болгарка", img: "https://via.placeholder.com/50"}
             ],
             "🔋 БЕСПРОВОДНЫЕ ИНСТРУМЕНТЫ": [
+                {name: "Шуруповерт CIDLI20558", img: "https://www.ingco.com/file/product/20240416/CIDLI20558.jpg", price: "590 000", old: "650 000"},
                 {name: "Шуруповерт CDLI2001", img: "https://via.placeholder.com/50"},
                 {name: "Цепная пила CMLI20228", img: "https://www.ingconepal.com/wp-content/uploads/2024/05/CMLI20228-500x500.jpg"}
             ],
@@ -47,20 +49,16 @@
                 {name: "Гайковерт", img: "https://via.placeholder.com/50"}
             ],
             "📏 ИЗМЕРИТЕЛЬНЫЕ ИНСТРУМЕНТЫ": [
-                {name: "Лазерный уровень", img: "https://via.placeholder.com/50"},
-                {name: "Рулетка", img: "https://via.placeholder.com/50"}
+                {name: "Лазерный уровень", img: "https://via.placeholder.com/50"}
             ],
             "💨 ПНЕВМАТИЧЕСКИЕ ИНСТРУМЕНТЫ": [
-                {name: "Краскопульт", img: "https://via.placeholder.com/50"},
-                {name: "Пневмогайковерт", img: "https://via.placeholder.com/50"}
+                {name: "Краскопульт", img: "https://via.placeholder.com/50"}
             ],
             "🌳 САДОВЫЕ ИНСТРУМЕНТЫ": [
-                {name: "Газонокосилка", img: "https://via.placeholder.com/50"},
-                {name: "Триммер", img: "https://via.placeholder.com/50"}
+                {name: "Газонокосилка", img: "https://via.placeholder.com/50"}
             ],
             "⚙ ГЕНЕРАТОРЫ": [
-                {name: "Бензиновый", img: "https://via.placeholder.com/50"},
-                {name: "Дизельный", img: "https://via.placeholder.com/50"}
+                {name: "Бензиновый", img: "https://via.placeholder.com/50"}
             ]
         };
 
@@ -68,8 +66,11 @@
         for (let cat in menu) {
             let items = menu[cat].map(i => `
                 <div class="row">
-                    <img src="${i.img}" class="thumb" onerror="this.src='https://via.placeholder.com/50?text=IMG'"> 
-                    <span>${i.name}</span>
+                    <img src="${i.img}" class="thumb" onerror="this.src='https://via.placeholder.com/50'"> 
+                    <div>
+                        <div>${i.name}</div>
+                        ${i.price ? `<div class="price">${i.price} сум <span class="old-price">${i.old} сум</span></div>` : ''}
+                    </div>
                 </div>
             `).join('');
 
