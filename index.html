@@ -6,15 +6,32 @@
     <title>INGCO Official Store</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        body { font-family: sans-serif; background: #121212; color: #fff; margin: 0; padding: 10px; }
-        .cat { background: #1e1e1e; margin-bottom: 8px; border-radius: 6px; overflow: hidden; border: 1px solid #333; }
-        .btn { width: 100%; padding: 15px; background: #252525; border: none; color: #ffcc00; text-align: left; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; }
+        body { font-family: sans-serif; background: #121212; color: #fff; margin: 0; padding: 0; }
+        /* Баннер и заголовки */
+        .header { text-align: center; padding: 15px; background: #000; border-bottom: 2px solid #ffcc00; }
+        .header h1 { margin: 0; font-size: 18px; color: #ffcc00; }
+        .banner { margin: 10px; border: 1px solid #333; }
+        .banner img { width: 100%; display: block; }
+        
+        /* Стили категорий */
+        .cat { background: #1e1e1e; margin: 0 10px 8px 10px; border-radius: 6px; overflow: hidden; border: 1px solid #333; }
+        .btn { width: 100%; padding: 15px; background: #252525; border: none; color: #fff; text-align: left; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; }
         .list { display: none; padding: 10px; background: #1a1a1a; }
         .row { padding: 8px; border-bottom: 1px solid #333; font-size: 14px; }
     </style>
 </head>
 <body>
+    <div class="header">
+        <h1>INGCO TOOLS</h1>
+        <small>OFFICIAL DISTRIBUTOR UZBEKISTAN</small>
+    </div>
+
+    <div class="banner">
+        <img src="960.jpg" alt="INGCO Banner">
+    </div>
+
     <div id="app"></div>
+
     <script>
         const menu = {
             "🛠 РУЧНЫЕ ИНСТРУМЕНТЫ": ["Плоскогубцы", "Отвертки", "Ключи"],
