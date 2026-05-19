@@ -14,8 +14,8 @@
         .cat { background: #1e1e1e; margin: 0 10px 8px 10px; border-radius: 6px; overflow: hidden; border: 1px solid #333; }
         .btn { width: 100%; padding: 15px; background: #252525; border: none; color: #fff; text-align: left; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; }
         .list { display: none; padding: 0; background: #1a1a1a; }
-        .row { padding: 10px; border-bottom: 1px solid #333; display: flex; align-items: center; gap: 10px; }
-        .thumb { width: 50px; height: 50px; object-fit: cover; border-radius: 4px; background: #333; }
+        .row { padding: 10px; border-bottom: 1px solid #333; display: flex; align-items: center; gap: 12px; }
+        .thumb { width: 50px; height: 50px; object-fit: contain; background: #000; border-radius: 4px; }
     </style>
 </head>
 <body>
@@ -40,7 +40,8 @@
             ],
             "🔋 БЕСПРОВОДНЫЕ ИНСТРУМЕНТЫ": [
                 {name: "Шуруповерт CDLI2001", img: "https://via.placeholder.com/50"},
-                {name: "Цепная пила CMLI20228", img: "https://www.ingconepal.com/wp-content/uploads/2024/05/CMLI20228-500x500.jpg"}
+                {name: "Цепная пила CMLI20228", img: "https://www.ingconepal.com/wp-content/uploads/2024/05/CMLI20228-500x500.jpg"},
+                {name: "УШМ CAGLI2120232", img: "https://www.ingconepal.com/wp-content/uploads/2024/05/CAGLI2120232-500x500.jpg"}
             ],
             "⚡ АККУМУЛЯТОРНЫЕ 42V": [
                 {name: "УШМ 42V", img: "https://via.placeholder.com/50"},
@@ -68,7 +69,7 @@
         for (let cat in menu) {
             let items = menu[cat].map(i => `
                 <div class="row">
-                    <img src="${i.img}" class="thumb"> 
+                    <img src="${i.img}" class="thumb" onerror="this.src='https://via.placeholder.com/50'"> 
                     <span>${i.name}</span>
                 </div>
             `).join('');
