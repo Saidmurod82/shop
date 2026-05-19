@@ -3,95 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INGCO Official Store</title>
+    <title>INGCO Tools Catalog</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #121212; color: #fff; margin: 0; padding: 0; }
-        .header { text-align: center; padding: 15px; background: #000; border-bottom: 2px solid #ffcc00; }
-        .cat { background: #1e1e1e; margin: 8px; border-radius: 6px; border: 1px solid #333; }
-        .btn { width: 100%; padding: 14px; background: #252525; border: none; color: #fff; text-align: left; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-        .list { display: none; padding: 0; background: #1a1a1a; }
-        .row { padding: 12px; border-bottom: 1px solid #333; display: flex; align-items: center; gap: 12px; }
-        .thumb { width: 60px; height: 60px; object-fit: contain; background: #000; border-radius: 4px; border: 1px solid #444; }
-        .info { flex: 1; }
-        .name { font-weight: bold; margin-bottom: 4px; display: block; }
-        .desc { font-size: 11px; color: #aaa; margin-bottom: 6px; line-height: 1.3; }
-        .price-box { font-size: 14px; color: #ffcc00; font-weight: bold; }
-        .old-price { text-decoration: line-through; color: #777; font-size: 12px; margin-left: 6px; }
-        .discount { background: #ffcc00; color: #000; padding: 1px 6px; border-radius: 4px; font-size: 11px; font-weight: bold; margin-left: 6px; }
+        :root { --main-yellow: #ffb400; --bg-color: #f6f6f6; }
+        body { font-family: sans-serif; background: var(--bg-color); margin: 0; padding: 0; }
+        .header { background: #000; padding: 15px; text-align: center; border-bottom: 3px solid var(--main-yellow); color: #fff; }
+        .cat-select-btn { background: #fff; border: 1px solid #ddd; padding: 15px; width: 95%; margin: 10px auto; display: flex; justify-content: space-between; border-radius: 8px; font-weight: bold; }
+        .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px; display: none; }
+        .product-card { background: #fff; padding: 10px; border-radius: 8px; text-align: center; border: 1px solid #eee; }
+        .product-card img { width: 100%; height: 100px; object-fit: contain; }
+        .price { color: var(--main-yellow); font-weight: bold; }
+        .old-price { text-decoration: line-through; color: #888; font-size: 11px; }
     </style>
 </head>
 <body>
-
-    <div class="header">
-        <h1>INGCO TOOLS</h1>
-    </div>
-
-    <div id="app"></div>
+    <div class="header"><h3>INGCO TOOLS</h3></div>
+    <div id="cat-buttons"></div>
+    <div id="product-grid" class="product-grid"></div>
 
     <script>
-        // Полный список категорий и товаров
-        const menu = {
-            "🛠 РУЧНЫЕ ИНСТРУМЕНТЫ": ["Плоскогубцы", "Отвертки", "Ключи"],
-            "⚡ ЭЛЕКТРОИНСТРУМЕНТЫ": ["Болгарка", "Дрель", "Перфоратор"],
-            "🔋 БЕСПРОВОДНЫЕ ИНСТРУМЕНТЫ": [
-                {
-                    name: "Шуруповерт CIDLI20558", 
-                    img: "cidli20558.jpg", 
-                    price: "590 000", 
-                    old: "650 000", 
-                    disc: "18%", 
-                    desc: "Бесщеточный, 20В, 55Нм, патрон 13мм, 2 АКБ 2.0Ач, 47 аксесс. в кейсе."
-                },
-                { name: "Шуруповерт CDLI2001", img: "cdli2001.jpg" },
-                { name: "Цепная пила CMLI20228", img: "cmli20228.jpg" }
+        const menuData = {
+            "🛠 РУЧНЫЕ ИНСТРУМЕНТЫ": [
+                {name: "Плоскогубцы", img: "", price: "45 000"},
+                {name: "Отвертки", img: "", price: "35 000"},
+                {name: "Ключи", img: "", price: "120 000"}
             ],
-            "⚡ АККУМУЛЯТОРНЫЕ 42V": ["УШМ 42V", "Гайковерт"],
-            "📏 ИЗМЕРИТЕЛЬНЫЕ ИНСТРУМЕНТЫ": ["Лазерный уровень", "Рулетка"],
-            "💨 ПНЕВМАТИЧЕСКИЕ ИНСТРУМЕНТЫ": ["Краскопульт", "Пневмогайковерт"],
-            "🌳 САДОВЫЕ ИНСТРУМЕНТЫ": ["Газонокосилка", "Триммер"],
-            "⚙ ГЕНЕРАТОРЫ": ["Бензиновый", "Дизельный"]
+            "⚡ ЭЛЕКТРОИНСТРУМЕНТЫ": [
+                {name: "Болгарка", img: "", price: "280 000"},
+                {name: "Дрель", img: "", price: "310 000"},
+                {name: "Перфоратор", img: "", price: "550 000"}
+            ],
+            "🔋 БЕСПРОВОДНЫЕ ИНСТРУМЕНТЫ": [
+                {name: "Шуруповерт CIDLI20558", img: "cidli20558.jpg", price: "590 000", old: "650 000", disc: "18%"},
+                {name: "Шуруповерт CDLI2001", img: "cdli2001.jpg", price: "410 000"},
+                {name: "Цепная пила CMLI20228", img: "cmli20228.jpg", price: "920 000"}
+            ],
+            "⚡ АККУМУЛЯТОРНЫЕ 42V": [
+                {name: "УШМ 42V", img: "", price: "750 000"},
+                {name: "Гайковерт", img: "", price: "800 000"}
+            ],
+            "📏 ИЗМЕРИТЕЛЬНЫЕ ИНСТРУМЕНТЫ": [
+                {name: "Лазерный уровень", img: "", price: "390 000"},
+                {name: "Рулетка", img: "", price: "15 000"}
+            ],
+            "💨 ПНЕВМАТИЧЕСКИЕ ИНСТРУМЕНТЫ": [
+                {name: "Краскопульт", img: "", price: "250 000"},
+                {name: "Пневмогайковерт", img: "", price: "450 000"}
+            ],
+            "🌳 САДОВЫЕ ИНСТРУМЕНТЫ": [
+                {name: "Газонокосилка", img: "", price: "1 200 000"},
+                {name: "Триммер", img: "", price: "600 000"}
+            ],
+            "⚙ ГЕНЕРАТОРЫ": [
+                {name: "Бензиновый", img: "", price: "3 500 000"},
+                {name: "Дизельный", img: "", price: "5 500 000"}
+            ]
         };
 
-        const app = document.getElementById('app');
+        const catDiv = document.getElementById('cat-buttons');
+        const grid = document.getElementById('product-grid');
 
-        for (let cat in menu) {
-            let itemsHTML = menu[cat].map(i => {
-                if (typeof i === 'string') {
-                    return `<div class="row"><span>${i}</span></div>`;
-                } else {
-                    return `
-                        <div class="row">
-                            <img src="${i.img}" class="thumb" onerror="this.style.display='none'">
-                            <div class="info">
-                                <span class="name">${i.name}</span>
-                                <div class="desc">${i.desc || ''}</div>
-                                <div class="price-box">
-                                    ${i.price} сум 
-                                    <span class="old-price">${i.old || ''}</span>
-                                    <span class="discount">${i.disc || ''}</span>
-                                </div>
-                            </div>
-                        </div>`;
-                }
-            }).join('');
-
-            app.innerHTML += `
-                <div class="cat">
-                    <button class="btn" onclick="toggle(this)">
-                        ${cat} <span>▶</span>
-                    </button>
-                    <div class="list">${itemsHTML}</div>
-                </div>`;
+        for (let cat in menuData) {
+            catDiv.innerHTML += `<button class="cat-select-btn" onclick="show('${cat}')">${cat} <span>▶</span></button>`;
         }
 
-        function toggle(btn) {
-            let list = btn.nextElementSibling;
-            let isOpen = list.style.display === "block";
-            list.style.display = isOpen ? "none" : "block";
-            btn.querySelector('span').innerText = isOpen ? "▶" : "▼";
+        function show(cat) {
+            grid.style.display = 'grid';
+            grid.innerHTML = menuData[cat].map(p => `
+                <div class="product-card">
+                    <img src="${p.img || 'https://via.placeholder.com/100'}">
+                    <div>${p.name}</div>
+                    <div class="price">${p.price} сум ${p.old ? `<br><span class="old-price">${p.old}</span>` : ''}</div>
+                </div>
+            `).join('');
         }
-
         window.Telegram.WebApp.expand();
     </script>
 </body>
