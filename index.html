@@ -3,30 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INGCO Tools</title>
+    <title>INGCO Official Store</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        body { font-family: sans-serif; background: #121212; color: #fff; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #121212; color: #fff; margin: 0; padding: 0; }
         .header { text-align: center; padding: 15px; background: #000; border-bottom: 2px solid #ffcc00; }
         .cat { background: #1e1e1e; margin: 8px; border-radius: 6px; border: 1px solid #333; }
-        .btn { width: 100%; padding: 14px; background: #252525; border: none; color: #fff; text-align: left; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; }
+        .btn { width: 100%; padding: 14px; background: #252525; border: none; color: #fff; text-align: left; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
         .list { display: none; padding: 0; background: #1a1a1a; }
-        .row { padding: 10px; border-bottom: 1px solid #333; display: flex; align-items: center; gap: 10px; }
-        .thumb { width: 45px; height: 45px; object-fit: contain; background: #000; border-radius: 4px; }
+        .row { padding: 12px; border-bottom: 1px solid #333; display: flex; align-items: center; gap: 12px; }
+        .thumb { width: 60px; height: 60px; object-fit: contain; background: #000; border-radius: 4px; border: 1px solid #444; }
+        .info { flex: 1; }
+        .name { font-weight: bold; margin-bottom: 4px; display: block; }
+        .desc { font-size: 11px; color: #aaa; margin-bottom: 6px; line-height: 1.3; }
+        .price-box { font-size: 14px; color: #ffcc00; font-weight: bold; }
+        .old-price { text-decoration: line-through; color: #777; font-size: 12px; margin-left: 6px; }
+        .discount { background: #ffcc00; color: #000; padding: 1px 6px; border-radius: 4px; font-size: 11px; font-weight: bold; margin-left: 6px; }
     </style>
 </head>
 <body>
-    <div class="header"><h1>INGCO TOOLS</h1></div>
+
+    <div class="header">
+        <h1>INGCO TOOLS</h1>
+    </div>
+
     <div id="app"></div>
 
     <script>
+        // Полный список категорий и товаров
         const menu = {
             "🛠 РУЧНЫЕ ИНСТРУМЕНТЫ": ["Плоскогубцы", "Отвертки", "Ключи"],
             "⚡ ЭЛЕКТРОИНСТРУМЕНТЫ": ["Болгарка", "Дрель", "Перфоратор"],
             "🔋 БЕСПРОВОДНЫЕ ИНСТРУМЕНТЫ": [
-                {name: "Шуруповерт CIDLI20558", img: "CIDLI20558.jpg"},
-                {name: "Шуруповерт CDLI2001", img: "cdli2001.jpg"},
-                {name: "Цепная пила CMLI20228", img: "cmli20228.jpg"}
+                {
+                    name: "Шуруповерт CIDLI20558", 
+                    img: "cidli20558.jpg", 
+                    price: "590 000", 
+                    old: "650 000", 
+                    disc: "18%", 
+                    desc: "Бесщеточный, 20В, 55Нм, патрон 13мм, 2 АКБ 2.0Ач, 47 аксесс. в кейсе."
+                },
+                { name: "Шуруповерт CDLI2001", img: "cdli2001.jpg" },
+                { name: "Цепная пила CMLI20228", img: "cmli20228.jpg" }
             ],
             "⚡ АККУМУЛЯТОРНЫЕ 42V": ["УШМ 42V", "Гайковерт"],
             "📏 ИЗМЕРИТЕЛЬНЫЕ ИНСТРУМЕНТЫ": ["Лазерный уровень", "Рулетка"],
@@ -36,27 +54,44 @@
         };
 
         const app = document.getElementById('app');
+
         for (let cat in menu) {
-            let items = menu[cat].map(i => {
-                let name = typeof i === 'string' ? i : i.name;
-                let imgPath = (typeof i === 'object' && i.img) ? i.img : "";
-                let img = imgPath ? `<img src="${imgPath}" class="thumb">` : `<div class="thumb" style="display:none"></div>`;
-                return `<div class="row">${img} <span>${name}</span></div>`;
+            let itemsHTML = menu[cat].map(i => {
+                if (typeof i === 'string') {
+                    return `<div class="row"><span>${i}</span></div>`;
+                } else {
+                    return `
+                        <div class="row">
+                            <img src="${i.img}" class="thumb" onerror="this.style.display='none'">
+                            <div class="info">
+                                <span class="name">${i.name}</span>
+                                <div class="desc">${i.desc || ''}</div>
+                                <div class="price-box">
+                                    ${i.price} сум 
+                                    <span class="old-price">${i.old || ''}</span>
+                                    <span class="discount">${i.disc || ''}</span>
+                                </div>
+                            </div>
+                        </div>`;
+                }
             }).join('');
 
             app.innerHTML += `
                 <div class="cat">
-                    <button class="btn" onclick="t(this)">${cat} <span>▶</span></button>
-                    <div class="list">${items}</div>
+                    <button class="btn" onclick="toggle(this)">
+                        ${cat} <span>▶</span>
+                    </button>
+                    <div class="list">${itemsHTML}</div>
                 </div>`;
         }
 
-        function t(b) {
-            let l = b.nextElementSibling;
-            let isOpen = l.style.display === "block";
-            l.style.display = isOpen ? "none" : "block";
-            b.querySelector('span').innerText = isOpen ? "▶" : "▼";
+        function toggle(btn) {
+            let list = btn.nextElementSibling;
+            let isOpen = list.style.display === "block";
+            list.style.display = isOpen ? "none" : "block";
+            btn.querySelector('span').innerText = isOpen ? "▶" : "▼";
         }
+
         window.Telegram.WebApp.expand();
     </script>
 </body>
