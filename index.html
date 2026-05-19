@@ -7,12 +7,11 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #121212; color: #fff; margin: 0; padding: 0; }
-        .header { text-align: center; padding: 15px; background: #000; border-bottom: 2px solid #ffcc00; position: sticky; top: 0; z-index: 100; }
+        .header { text-align: center; padding: 15px; background: #000; border-bottom: 2px solid #ffcc00; position: sticky; top: 0; z-index: 100; font-weight: bold; }
         .cat-btn { width: 100%; padding: 16px; background: #252525; border: none; border-bottom: 1px solid #333; color: #fff; text-align: left; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
         .grid { display: none; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px; background: #1a1a1a; }
         .card { background: #252525; padding: 8px; border-radius: 6px; text-align: center; border: 1px solid #333; display: flex; flex-direction: column; justify-content: space-between; }
-        .card img { width: 100%; height: 90px; object-fit: contain; margin-bottom: 5px; border-radius: 4px; }
-        .name { font-size: 11px; height: 32px; overflow: hidden; margin-bottom: 5px; line-height: 1.2; }
+        .name { font-size: 11px; height: 32px; overflow: hidden; margin-bottom: 5px; line-height: 1.2; font-weight: bold; }
         .price { color: #ffcc00; font-size: 13px; font-weight: bold; margin-bottom: 8px; }
         .old-price { text-decoration: line-through; color: #777; font-size: 9px; display: block; }
         .order-btn { background: #ffcc00; border: none; padding: 8px; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 11px; color: #000; width: 100%; }
@@ -20,7 +19,6 @@
         #modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 9999; }
         .modal { background: #252525; padding: 20px; border-radius: 10px; width: 85%; text-align: center; border: 1px solid #ffcc00; }
         
-        /* Новая кнопка-ссылка */
         .call-link { 
             display: block; background: #28a745; color: #fff; text-decoration: none; 
             padding: 14px; border-radius: 5px; font-weight: bold; font-size: 16px; margin-top: 20px;
@@ -42,19 +40,33 @@
 
     <script>
         const menu = {
-            "🛠 РУЧНЫЕ ИНСТРУМЕНТЫ": [{name: "Плоскогубцы", price: "45 000"}, {name: "Отвертки", price: "35 000"}, {name: "Ключи", price: "120 000"}],
-            "⚡ ЭЛЕКТРОИНСТРУМЕНТЫ": [{name: "Болгарка", price: "280 000"}, {name: "Дрель", price: "310 000"}, {name: "Перфоратор", price: "550 000"}],
+            "🛠 РУЧНЫЕ ИНСТРУМЕНТЫ": [
+                {name: "Плоскогубцы", price: "45 000"}, {name: "Отвертки", price: "35 000"}, {name: "Ключи", price: "120 000"}
+            ],
+            "⚡ ЭЛЕКТРОИНСТРУМЕНТЫ": [
+                {name: "Болгарка", price: "280 000"}, {name: "Дрель", price: "310 000"}, {name: "Перфоратор", price: "550 000"}
+            ],
             "🔋 БЕСПРОВОДНЫЕ ИНСТРУМЕНТЫ": [
                 {name: "Шуруповерт CIDLI20558", price: "590 000", old: "650 000"},
                 {name: "Шуруповерт CDLI2001", price: "410 000"},
                 {name: "Цепная пила CMLI20228", price: "920 000"},
                 {name: "УШМ CAGLI2120232", price: "780 000"}
             ],
-            "⚡ АККУМУЛЯТОРНЫЕ 42V": [{name: "УШМ 42V", price: "750 000"}, {name: "Гайковерт", price: "800 000"}],
-            "📏 ИЗМЕРИТЕЛЬНЫЕ ИНСТРУМЕНТЫ": [{name: "Лазерный уровень", price: "390 000"}, {name: "Рулетка", price: "15 000"}],
-            "💨 ПНЕВМАТИЧЕСКИЕ ИНСТРУМЕНТЫ": [{name: "Краскопульт", price: "250 000"}, {name: "Пневмогайковерт", price: "450 000"}],
-            "🌳 САДОВЫЕ ИНСТРУМЕНТЫ": [{name: "Газонокосилка", price: "1 200 000"}, {name: "Триммер", price: "600 000"}],
-            "⚙ ГЕНЕРАТОРЫ": [{name: "Бензиновый", price: "3 500 000"}, {name: "Дизельный", price: "5 500 000"}]
+            "⚡ АККУМУЛЯТОРНЫЕ 42V": [
+                {name: "УШМ 42V", price: "750 000"}, {name: "Гайковерт", price: "800 000"}
+            ],
+            "📏 ИЗМЕРИТЕЛЬНЫЕ ИНСТРУМЕНТЫ": [
+                {name: "Лазерный уровень", price: "390 000"}, {name: "Рулетка", price: "15 000"}
+            ],
+            "💨 ПНЕВМАТИЧЕСКИЕ ИНСТРУМЕНТЫ": [
+                {name: "Краскопульт", price: "250 000"}, {name: "Пневмогайковерт", price: "450 000"}
+            ],
+            "🌳 САДОВЫЕ ИНСТРУМЕНТЫ": [
+                {name: "Газонокосилка", price: "1 200 000"}, {name: "Триммер", price: "600 000"}
+            ],
+            "⚙ ГЕНЕРАТОРЫ": [
+                {name: "Бензиновый", price: "3 500 000"}, {name: "Дизельный", price: "5 500 000"}
+            ]
         };
 
         const app = document.getElementById('app');
