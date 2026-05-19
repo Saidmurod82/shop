@@ -18,9 +18,10 @@
         #modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 9999; }
         .modal { background: #252525; padding: 20px; border-radius: 10px; width: 85%; text-align: center; border: 1px solid #ffcc00; }
         
-        .call-link { 
-            display: block; background: #28a745; color: #fff; border: none; width: 100%;
-            padding: 14px; border-radius: 5px; font-weight: bold; font-size: 16px; margin-top: 20px; cursor: pointer;
+        /* Стиль для кликабельного номера */
+        .phone-link { 
+            display: block; color: #28a745; font-size: 22px; font-weight: bold; 
+            text-decoration: none; margin: 20px 0;
         }
         .close-link { display: block; color: #888; margin-top: 15px; font-size: 12px; cursor: pointer; }
     </style>
@@ -31,8 +32,8 @@
 
     <div id="modal-overlay">
         <div class="modal">
-            <p id="m-text" style="font-weight: bold; line-height: 1.4;"></p>
-            <button class="call-link" onclick="window.Telegram.WebApp.openLink('tel:+998903553377')">ПОЗВОНИТЬ МЕНЕДЖЕРУ</button>
+            <p id="m-text" style="font-weight: bold; line-height: 1.4; margin-bottom: 0;"></p>
+            <a href="tel:+998903553377" class="phone-link">+998 90 355 33 77</a>
             <span class="close-link" onclick="document.getElementById('modal-overlay').style.display='none'">ЗАКРЫТЬ ОКНО</span>
         </div>
     </div>
@@ -64,7 +65,7 @@
         }
 
         function showOrder(name) {
-            document.getElementById('m-text').innerHTML = "Для заказа " + name + "<br>Свяжитесь с торговым Менеджером";
+            document.getElementById('m-text').innerHTML = "Для заказа " + name + "<br>Позвоните менеджеру:";
             document.getElementById('modal-overlay').style.display = "flex";
         }
 
