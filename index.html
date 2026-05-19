@@ -12,10 +12,10 @@
         .banner { margin: 10px; border: 1px solid #333; }
         .banner img { width: 100%; display: block; }
         .cat { background: #1e1e1e; margin: 0 10px 8px 10px; border-radius: 6px; overflow: hidden; border: 1px solid #333; }
-        .btn { width: 100%; padding: 15px; background: #252525; border: none; color: #fff; text-align: left; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; }
+        .btn { width: 100%; padding: 15px; background: #252525; border: none; color: #fff; text-align: left; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; align-items: center;}
         .list { display: none; padding: 0; background: #1a1a1a; }
         .row { padding: 10px; border-bottom: 1px solid #333; display: flex; align-items: center; gap: 12px; }
-        .thumb { width: 50px; height: 50px; object-fit: contain; background: #000; border-radius: 4px; }
+        .thumb { width: 50px; height: 50px; object-fit: contain; background: #252525; border-radius: 4px; border: 1px solid #444;}
     </style>
 </head>
 <body>
@@ -29,6 +29,13 @@
     <div id="app"></div>
 
     <script>
+        // Функция для обработки ошибок загрузки изображений
+        function imgError(image) {
+            image.onerror = ""; // предотвращает зацикливание
+            image.src = "https://via.placeholder.com/50x50?text=Нет+фото";
+            return true;
+        }
+
         const menu = {
             "🛠 РУЧНЫЕ ИНСТРУМЕНТЫ": [
                 {name: "Плоскогубцы", img: "https://via.placeholder.com/50"},
@@ -69,21 +76,24 @@
         for (let cat in menu) {
             let items = menu[cat].map(i => `
                 <div class="row">
-                    <img src="${i.img}" class="thumb" onerror="this.src='https://via.placeholder.com/50'"> 
+                    <img src="${i.img}" class="thumb" onerror="imgError(this);"> 
                     <span>${i.name}</span>
                 </div>
             `).join('');
 
             app.innerHTML += `
                 <div class="cat">
-                    <button class="btn" onclick="t(this)">${cat} <span>▶</span></button>
+                    <button class="btn" onclick="t(this)">
+                        <span>${cat}</span>
+                        <span class="arrow">▶</span>
+                    </button>
                     <div class="list">${items}</div>
                 </div>`;
         }
 
         function t(b) {
             let l = b.nextElementSibling;
-            let s = b.querySelector('span');
+            let s = b.querySelector('.arrow');
             l.style.display = (l.style.display === "block") ? "none" : "block";
             s.innerText = (l.style.display === "block") ? "▼" : "▶";
         }
