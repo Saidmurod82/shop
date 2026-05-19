@@ -3,80 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INGCO Tools Catalog</title>
+    <title>INGCO Catalog</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        :root { --main-yellow: #ffb400; --bg-color: #f6f6f6; }
-        body { font-family: sans-serif; background: var(--bg-color); margin: 0; padding: 0; }
-        .header { background: #000; padding: 15px; text-align: center; border-bottom: 3px solid var(--main-yellow); color: #fff; }
-        .cat-select-btn { background: #fff; border: 1px solid #ddd; padding: 15px; width: 95%; margin: 10px auto; display: flex; justify-content: space-between; border-radius: 8px; font-weight: bold; }
-        .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px; display: none; }
-        .product-card { background: #fff; padding: 10px; border-radius: 8px; text-align: center; border: 1px solid #eee; }
-        .product-card img { width: 100%; height: 100px; object-fit: contain; }
-        .price { color: var(--main-yellow); font-weight: bold; }
-        .old-price { text-decoration: line-through; color: #888; font-size: 11px; }
+        body { font-family: sans-serif; background: #121212; color: #fff; margin: 0; padding: 0; }
+        .header { text-align: center; padding: 20px; background: #000; border-bottom: 2px solid #ffcc00; }
+        .cat-btn { width: 95%; margin: 10px auto; padding: 15px; background: #252525; border: 1px solid #333; color: #fff; border-radius: 8px; display: flex; justify-content: space-between; font-weight: bold; cursor: pointer; }
+        .grid { display: none; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px; }
+        .card { background: #1e1e1e; padding: 10px; border-radius: 8px; text-align: center; border: 1px solid #333; }
+        .card img { width: 100%; height: 100px; object-fit: contain; margin-bottom: 5px; }
+        .name { font-size: 12px; height: 35px; overflow: hidden; margin-bottom: 5px; }
+        .price { color: #ffcc00; font-weight: bold; font-size: 13px; }
+        .old-price { text-decoration: line-through; color: #888; font-size: 10px; display: block; }
     </style>
 </head>
 <body>
-    <div class="header"><h3>INGCO TOOLS</h3></div>
-    <div id="cat-buttons"></div>
-    <div id="product-grid" class="product-grid"></div>
+    <div class="header"><h1>INGCO TOOLS</h1></div>
+    <div id="app"></div>
 
     <script>
-        const menuData = {
+        const menu = {
             "🛠 РУЧНЫЕ ИНСТРУМЕНТЫ": [
-                {name: "Плоскогубцы", img: "", price: "45 000"},
-                {name: "Отвертки", img: "", price: "35 000"},
-                {name: "Ключи", img: "", price: "120 000"}
+                {name: "Плоскогубцы", price: "45 000"}, {name: "Отвертки", price: "35 000"}, {name: "Ключи", price: "120 000"}
             ],
             "⚡ ЭЛЕКТРОИНСТРУМЕНТЫ": [
-                {name: "Болгарка", img: "", price: "280 000"},
-                {name: "Дрель", img: "", price: "310 000"},
-                {name: "Перфоратор", img: "", price: "550 000"}
+                {name: "Болгарка", price: "280 000"}, {name: "Дрель", price: "310 000"}, {name: "Перфоратор", price: "550 000"}
             ],
             "🔋 БЕСПРОВОДНЫЕ ИНСТРУМЕНТЫ": [
-                {name: "Шуруповерт CIDLI20558", img: "cidli20558.jpg", price: "590 000", old: "650 000", disc: "18%"},
+                {name: "Шуруповерт CIDLI20558", img: "cidli20558.jpg", price: "590 000", old: "650 000"},
                 {name: "Шуруповерт CDLI2001", img: "cdli2001.jpg", price: "410 000"},
                 {name: "Цепная пила CMLI20228", img: "cmli20228.jpg", price: "920 000"}
             ],
             "⚡ АККУМУЛЯТОРНЫЕ 42V": [
-                {name: "УШМ 42V", img: "", price: "750 000"},
-                {name: "Гайковерт", img: "", price: "800 000"}
+                {name: "УШМ 42V", price: "750 000"}, {name: "Гайковерт", price: "800 000"}
             ],
             "📏 ИЗМЕРИТЕЛЬНЫЕ ИНСТРУМЕНТЫ": [
-                {name: "Лазерный уровень", img: "", price: "390 000"},
-                {name: "Рулетка", img: "", price: "15 000"}
+                {name: "Лазерный уровень", price: "390 000"}, {name: "Рулетка", price: "15 000"}
             ],
             "💨 ПНЕВМАТИЧЕСКИЕ ИНСТРУМЕНТЫ": [
-                {name: "Краскопульт", img: "", price: "250 000"},
-                {name: "Пневмогайковерт", img: "", price: "450 000"}
+                {name: "Краскопульт", price: "250 000"}, {name: "Пневмогайковерт", price: "450 000"}
             ],
             "🌳 САДОВЫЕ ИНСТРУМЕНТЫ": [
-                {name: "Газонокосилка", img: "", price: "1 200 000"},
-                {name: "Триммер", img: "", price: "600 000"}
+                {name: "Газонокосилка", price: "1 200 000"}, {name: "Триммер", price: "600 000"}
             ],
             "⚙ ГЕНЕРАТОРЫ": [
-                {name: "Бензиновый", img: "", price: "3 500 000"},
-                {name: "Дизельный", img: "", price: "5 500 000"}
+                {name: "Бензиновый", price: "3 500 000"}, {name: "Дизельный", price: "5 500 000"}
             ]
         };
 
-        const catDiv = document.getElementById('cat-buttons');
-        const grid = document.getElementById('product-grid');
-
-        for (let cat in menuData) {
-            catDiv.innerHTML += `<button class="cat-select-btn" onclick="show('${cat}')">${cat} <span>▶</span></button>`;
-        }
-
-        function show(cat) {
-            grid.style.display = 'grid';
-            grid.innerHTML = menuData[cat].map(p => `
-                <div class="product-card">
-                    <img src="${p.img || 'https://via.placeholder.com/100'}">
-                    <div>${p.name}</div>
-                    <div class="price">${p.price} сум ${p.old ? `<br><span class="old-price">${p.old}</span>` : ''}</div>
+        const app = document.getElementById('app');
+        for (let cat in menu) {
+            let items = menu[cat].map(i => `
+                <div class="card">
+                    <img src="${i.img || 'https://via.placeholder.com/100?text=INGCO'}" onerror="this.src='https://via.placeholder.com/100'">
+                    <div class="name">${i.name}</div>
+                    <div class="price">${i.price} сум ${i.old ? '<span class="old-price">' + i.old + '</span>' : ''}</div>
                 </div>
             `).join('');
+
+            app.innerHTML += `<button class="cat-btn" onclick="t(this)">${cat} <span>▶</span></button><div class="grid">${items}</div>`;
+        }
+
+        function t(b) {
+            let g = b.nextElementSibling;
+            g.style.display = (g.style.display === "grid") ? "none" : "grid";
+            b.querySelector('span').innerText = (g.style.display === "grid") ? "▼" : "▶";
         }
         window.Telegram.WebApp.expand();
     </script>
