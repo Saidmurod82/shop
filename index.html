@@ -14,8 +14,7 @@
         .cat { background: #1e1e1e; margin: 0 10px 8px 10px; border-radius: 6px; overflow: hidden; border: 1px solid #333; }
         .btn { width: 100%; padding: 15px; background: #252525; border: none; color: #fff; text-align: left; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; }
         .list { display: none; padding: 10px; background: #1a1a1a; }
-        .item-card { display: flex; align-items: center; gap: 10px; padding: 8px; border-bottom: 1px solid #333; }
-        .item-img { width: 60px; height: 60px; object-fit: cover; border-radius: 4px; }
+        .row { padding: 10px; border-bottom: 1px solid #333; font-size: 14px; }
     </style>
 </head>
 <body>
@@ -29,42 +28,22 @@
     <div id="app"></div>
 
     <script>
+        // Используем простой список для максимальной стабильности
         const menu = {
-            "🛠 РУЧНЫЕ ИНСТРУМЕНТЫ": [{name: "Плоскогубцы", price: "65 000 сум", desc: "Усиленные", img: "https://via.placeholder.com/60"}],
-            "⚡ ЭЛЕКТРОИНСТРУМЕНТЫ": [{name: "Болгарка", price: "480 000 сум", desc: "950W, мощная", img: "https://via.placeholder.com/60"}],
-            "🔋 БЕСПРОВОДНЫЕ ИНСТРУМЕНТЫ": [
-                {
-                    name: "Шуруповерт CDLI2001",
-                    price: "750 000 сум",
-                    desc: "20V, Li-ion, 2 акк.",
-                    img: "https://www.ingconepal.com/wp-content/uploads/2024/05/CMLI20228-500x500.jpg"
-                },
-                {
-                    name: "Многофункциональный CMLI20228",
-                    price: "Цена по запросу",
-                    desc: "20V Li-Ion, универсальный",
-                    img: "https://www.ingconepal.com/wp-content/uploads/2024/05/CMLI20228-500x500.jpg"
-                }
-            ]
+            "🛠 РУЧНЫЕ ИНСТРУМЕНТЫ": ["Плоскогубцы", "Отвертки", "Ключи"],
+            "⚡ ЭЛЕКТРОИНСТРУМЕНТЫ": ["Болгарки", "Дрели", "Перфораторы"],
+            "🔋 БЕСПРОВОДНЫЕ ИНСТРУМЕНТЫ": ["Шуруповерт CDLI2001", "Цепная пила CMLI20228"],
+            "⚙ ГЕНЕРАТОРЫ": ["Бензиновые", "Дизельные"]
         };
 
         const app = document.getElementById('app');
         for (let cat in menu) {
-            let itemsHtml = menu[cat].map(i => `
-                <div class="item-card">
-                    <img src="${i.img}" class="item-img" onerror="this.src='https://via.placeholder.com/60'">
-                    <div>
-                        <div style="font-weight:bold;">${i.name}</div>
-                        <div style="font-size:11px; color:#aaa;">${i.desc}</div>
-                        <div style="color:#ffcc00; font-size:13px;">${i.price}</div>
-                    </div>
-                </div>
-            `).join('');
-            
             app.innerHTML += `
                 <div class="cat">
                     <button class="btn" onclick="t(this)">${cat} <span>▶</span></button>
-                    <div class="list">${itemsHtml}</div>
+                    <div class="list">
+                        ${menu[cat].map(item => `<div class="row">${item}</div>`).join('')}
+                    </div>
                 </div>`;
         }
 
