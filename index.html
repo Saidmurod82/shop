@@ -6,7 +6,7 @@
     <title>INGCO TOOLS</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #121212; color: #fff; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #121212; color: #fff; margin: 0; padding: 0; }
         .header { text-align: center; padding: 15px; background: #000; border-bottom: 2px solid #ffcc00; position: sticky; top: 0; z-index: 100; }
         .cat-btn { width: 100%; padding: 16px; background: #252525; border: none; border-bottom: 1px solid #333; color: #fff; text-align: left; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
         .grid { display: none; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px; background: #1a1a1a; }
@@ -19,10 +19,13 @@
         
         #modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 9999; }
         .modal { background: #252525; padding: 20px; border-radius: 10px; width: 85%; text-align: center; border: 1px solid #ffcc00; }
-        .modal-btns { display: flex; gap: 10px; margin-top: 20px; justify-content: center; }
-        /* Ссылка-кнопка для гарантированного звонка */
-        .btn-call { background: #28a745; color: #fff; padding: 12px 20px; border: none; border-radius: 5px; font-weight: bold; font-size: 14px; text-decoration: none; display: inline-block; }
-        .btn-cancel { background: #dc3545; color: #fff; padding: 12px 20px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 14px; }
+        
+        /* Новая кнопка-ссылка */
+        .call-link { 
+            display: block; background: #28a745; color: #fff; text-decoration: none; 
+            padding: 14px; border-radius: 5px; font-weight: bold; font-size: 16px; margin-top: 20px;
+        }
+        .close-link { display: block; color: #888; margin-top: 15px; font-size: 12px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -31,43 +34,27 @@
 
     <div id="modal-overlay">
         <div class="modal">
-            <p id="m-text" style="font-weight: bold; margin-bottom: 5px;"></p>
-            <div class="modal-btns">
-                <a href="tel:+998903553377" class="btn-call">ПОЗВОНИТЬ</a>
-                <button class="btn-cancel" onclick="document.getElementById('modal-overlay').style.display='none'">ОТМЕНА</button>
-            </div>
+            <p id="m-text" style="font-weight: bold; line-height: 1.4;"></p>
+            <a href="tel:+998903553377" class="call-link">ПОЗВОНИТЬ МЕНЕДЖЕРУ</a>
+            <span class="close-link" onclick="document.getElementById('modal-overlay').style.display='none'">ЗАКРЫТЬ ОКНО</span>
         </div>
     </div>
 
     <script>
         const menu = {
-            "🛠 РУЧНЫЕ ИНСТРУМЕНТЫ": [
-                {name: "Плоскогубцы", price: "45 000"}, {name: "Отвертки", price: "35 000"}, {name: "Ключи", price: "120 000"}
-            ],
-            "⚡ ЭЛЕКТРОИНСТРУМЕНТЫ": [
-                {name: "Болгарка", price: "280 000"}, {name: "Дрель", price: "310 000"}, {name: "Перфоратор", price: "550 000"}
-            ],
+            "🛠 РУЧНЫЕ ИНСТРУМЕНТЫ": [{name: "Плоскогубцы", price: "45 000"}, {name: "Отвертки", price: "35 000"}, {name: "Ключи", price: "120 000"}],
+            "⚡ ЭЛЕКТРОИНСТРУМЕНТЫ": [{name: "Болгарка", price: "280 000"}, {name: "Дрель", price: "310 000"}, {name: "Перфоратор", price: "550 000"}],
             "🔋 БЕСПРОВОДНЫЕ ИНСТРУМЕНТЫ": [
                 {name: "Шуруповерт CIDLI20558", price: "590 000", old: "650 000"},
                 {name: "Шуруповерт CDLI2001", price: "410 000"},
                 {name: "Цепная пила CMLI20228", price: "920 000"},
                 {name: "УШМ CAGLI2120232", price: "780 000"}
             ],
-            "⚡ АККУМУЛЯТОРНЫЕ 42V": [
-                {name: "УШМ 42V", price: "750 000"}, {name: "Гайковерт", price: "800 000"}
-            ],
-            "📏 ИЗМЕРИТЕЛЬНЫЕ ИНСТРУМЕНТЫ": [
-                {name: "Лазерный уровень", price: "390 000"}, {name: "Рулетка", price: "15 000"}
-            ],
-            "💨 ПНЕВМАТИЧЕСКИЕ ИНСТРУМЕНТЫ": [
-                {name: "Краскопульт", price: "250 000"}, {name: "Пневмогайковерт", price: "450 000"}
-            ],
-            "🌳 САДОВЫЕ ИНСТРУМЕНТЫ": [
-                {name: "Газонокосилка", price: "1 200 000"}, {name: "Триммер", price: "600 000"}
-            ],
-            "⚙ ГЕНЕРАТОРЫ": [
-                {name: "Бензиновый", price: "3 500 000"}, {name: "Дизельный", price: "5 500 000"}
-            ]
+            "⚡ АККУМУЛЯТОРНЫЕ 42V": [{name: "УШМ 42V", price: "750 000"}, {name: "Гайковерт", price: "800 000"}],
+            "📏 ИЗМЕРИТЕЛЬНЫЕ ИНСТРУМЕНТЫ": [{name: "Лазерный уровень", price: "390 000"}, {name: "Рулетка", price: "15 000"}],
+            "💨 ПНЕВМАТИЧЕСКИЕ ИНСТРУМЕНТЫ": [{name: "Краскопульт", price: "250 000"}, {name: "Пневмогайковерт", price: "450 000"}],
+            "🌳 САДОВЫЕ ИНСТРУМЕНТЫ": [{name: "Газонокосилка", price: "1 200 000"}, {name: "Триммер", price: "600 000"}],
+            "⚙ ГЕНЕРАТОРЫ": [{name: "Бензиновый", price: "3 500 000"}, {name: "Дизельный", price: "5 500 000"}]
         };
 
         const app = document.getElementById('app');
@@ -78,7 +65,6 @@
                     <div class="price">${i.price} сум ${i.old ? '<span class="old-price">' + i.old + '</span>' : ''}</div>
                     <button class="order-btn" onclick="showOrder('${i.name}')">ЗАКАЗАТЬ</button>
                 </div>`).join('');
-            
             app.innerHTML += `<button class="cat-btn" onclick="this.nextElementSibling.style.display=(this.nextElementSibling.style.display==='grid'?'none':'grid')">${cat} <span>▶</span></button><div class="grid">${items}</div>`;
         }
 
