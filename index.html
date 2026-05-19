@@ -7,17 +7,15 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         body { font-family: sans-serif; background: #121212; color: #fff; margin: 0; padding: 0; }
-        /* Баннер и заголовки */
         .header { text-align: center; padding: 15px; background: #000; border-bottom: 2px solid #ffcc00; }
         .header h1 { margin: 0; font-size: 18px; color: #ffcc00; }
         .banner { margin: 10px; border: 1px solid #333; }
         .banner img { width: 100%; display: block; }
-        
-        /* Стили категорий */
         .cat { background: #1e1e1e; margin: 0 10px 8px 10px; border-radius: 6px; overflow: hidden; border: 1px solid #333; }
         .btn { width: 100%; padding: 15px; background: #252525; border: none; color: #fff; text-align: left; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; }
         .list { display: none; padding: 10px; background: #1a1a1a; }
-        .row { padding: 8px; border-bottom: 1px solid #333; font-size: 14px; }
+        .item-card { display: flex; align-items: center; gap: 10px; padding: 8px; border-bottom: 1px solid #333; }
+        .item-img { width: 60px; height: 60px; object-fit: cover; border-radius: 4px; }
     </style>
 </head>
 <body>
@@ -25,42 +23,51 @@
         <h1>INGCO TOOLS</h1>
         <small>OFFICIAL DISTRIBUTOR UZBEKISTAN</small>
     </div>
-
     <div class="banner">
         <img src="960.jpg" alt="INGCO Banner">
     </div>
-
     <div id="app"></div>
 
     <script>
         const menu = {
-            "🛠 РУЧНЫЕ ИНСТРУМЕНТЫ": ["Плоскогубцы", "Отвертки", "Ключи"],
-            "⚡ ЭЛЕКТРОИНСТРУМЕНТЫ": ["Болгарки", "Дрели", "Перфораторы"],
+            "🛠 РУЧНЫЕ ИНСТРУМЕНТЫ": [{name: "Плоскогубцы", price: "65 000 сум", desc: "Усиленные", img: "https://via.placeholder.com/60"}],
+            "⚡ ЭЛЕКТРОИНСТРУМЕНТЫ": [{name: "Болгарка", price: "480 000 сум", desc: "950W, мощная", img: "https://via.placeholder.com/60"}],
             "🔋 БЕСПРОВОДНЫЕ ИНСТРУМЕНТЫ": [
-    {
-        name: "Шуруповерт CDLI2001",
-        price: "750 000 сум",
-        desc: "20V, Li-ion, 2 аккумулятора.",
-        img: "drill.jpg" 
-    },
-    {
-        name: "Многофункциональный инструмент CMLI20228",
-        price: "Уточнить цену",
-        desc: "20V Li-Ion, универсальный инструмент для резки и шлифовки.",
-        img: "https://www.ingconepal.com/wp-content/uploads/2024/05/CMLI20228-500x500.jpg"
-    }
-],
-
-            "⚡ АККУМУЛЯТОРНЫЕ 42V": ["УШМ 42V", "Гайковерты"],
-            "📏 ИЗМЕРИТЕЛЬНЫЕ ИНСТРУМЕНТЫ": ["Лазерные уровни", "Рулетки"],
-            "💨 ПНЕВМАТИЧЕСКИЕ ИНСТРУМЕНТЫ": ["Краскопульты", "Гайковерты"],
-            "🌳 САДОВЫЕ ИНСТРУМЕНТЫ": ["Газонокосилки", "Триммеры"],
-            "⚙ ГЕНЕРАТОРЫ": ["Бензиновые", "Дизельные"]
+                {
+                    name: "Шуруповерт CDLI2001",
+                    price: "750 000 сум",
+                    desc: "20V, Li-ion, 2 акк.",
+                    img: "https://www.ingconepal.com/wp-content/uploads/2024/05/CMLI20228-500x500.jpg"
+                },
+                {
+                    name: "Многофункциональный CMLI20228",
+                    price: "Цена по запросу",
+                    desc: "20V Li-Ion, универсальный",
+                    img: "https://www.ingconepal.com/wp-content/uploads/2024/05/CMLI20228-500x500.jpg"
+                }
+            ]
         };
+
         const app = document.getElementById('app');
         for (let cat in menu) {
-            app.innerHTML += `<div class="cat"><button class="btn" onclick="t(this)">${cat} <span>▶</span></button><div class="list">${menu[cat].map(i => `<div class="row">${i}</div>`).join('')}</div></div>`;
+            let itemsHtml = menu[cat].map(i => `
+                <div class="item-card">
+                    <img src="${i.img}" class="item-img" onerror="this.src='https://via.placeholder.com/60'">
+                    <div>
+                        <div style="font-weight:bold;">${i.name}</div>
+                        <div style="font-size:11px; color:#aaa;">${i.desc}</div>
+                        <div style="color:#ffcc00; font-size:13px;">${i.price}</div>
+                    </div>
+                </div>
+            `).join('');
+            
+            app.innerHTML += `
+                <div class="cat">
+                    <button class="btn" onclick="t(this)">${cat} <span>▶</span></button>
+                    <div class="list">${itemsHtml}</div>
+                </div>`;
         }
+
         function t(b) {
             let l = b.nextElementSibling;
             let s = b.querySelector('span');
