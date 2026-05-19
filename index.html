@@ -20,12 +20,11 @@
     <div id="app"></div>
 
     <script>
-        // Теперь здесь только имена ваших локальных файлов
         const menu = {
             "🛠 РУЧНЫЕ ИНСТРУМЕНТЫ": ["Плоскогубцы", "Отвертки", "Ключи"],
             "⚡ ЭЛЕКТРОИНСТРУМЕНТЫ": ["Болгарка", "Дрель", "Перфоратор"],
             "🔋 БЕСПРОВОДНЫЕ ИНСТРУМЕНТЫ": [
-                {name: "Шуруповерт CIDLI20558", img: "cidli20558.jpg"},
+                {name: "Шуруповерт CIDLI20558", img: "CIDLI20558.jpg"},
                 {name: "Шуруповерт CDLI2001", img: "cdli2001.jpg"},
                 {name: "Цепная пила CMLI20228", img: "cmli20228.jpg"}
             ],
@@ -41,7 +40,6 @@
             let items = menu[cat].map(i => {
                 let name = typeof i === 'string' ? i : i.name;
                 let imgPath = (typeof i === 'object' && i.img) ? i.img : "";
-                // Если картинка есть, выводим её, если нет — оставляем пустое место
                 let img = imgPath ? `<img src="${imgPath}" class="thumb">` : `<div class="thumb" style="display:none"></div>`;
                 return `<div class="row">${img} <span>${name}</span></div>`;
             }).join('');
