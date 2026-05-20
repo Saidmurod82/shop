@@ -58,13 +58,13 @@
                 {name: "Бокорезы усиленные HHDCP08188", desc: "INDUSTRIAL, 180мм. Усиленная конструкция для тяжелых работ.", price: "50 000", old: "58 000", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1094.webp"},
                 {name: "Бокорезы многофункциональные 6 в 1", desc: "INDUSTRIAL, 200мм. Резка, зачистка, обжим, снятие заусенцев.", price: "73 000", old: "83 000", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1096.webp"},
                 {name: "Тонкогубцы многофункциональные 6 в 1", desc: "INDUSTRIAL, 200мм. Универсальный инструмент с множеством функций.", price: "83 000", old: "95 000", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1097.webp"},
-                {name: "Универсальные ножницы HES0187", desc: "INDUSTRIAL, 178мм (7 дюймов). Идеальны для резки проводов, кожи, проволочной сетки. Оснащены зубьями для лучшего захвата.", price: "37 000", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1098.webp"}
+                {name: "Универсальные ножницы HES0187", desc: "INDUSTRIAL, 178мм (7 дюймов). Идеальны для резки проводов, кожи, проволочной сетки.", price: "37 000", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1098.webp"}
+            ],
+            "🔋 БЕСПРОВОДНЫЕ ИНСТРУМЕНТЫ": [
+                {name: "Аккумуляторная ударная дрель CIDLI20558", desc: "Компактная бесщеточная дрель P20S. Мощность 55 Нм, ударная функция, 2 аккумулятора 2.0Ah в комплекте, кейс.", price: "600 000", old: "670 000", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1099.jpg"},
+                {name: "Компактная бесщеточная дрель CDLI20668", desc: "Бесщеточная дрель P20S. 66 Нм, 13 мм патрон. В комплекте: 2 аккумулятора 2.0Ah, зарядка, кейс.", price: "675 000", old: "795 000", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1100.jpg"}
             ],
             "⚡ ЭЛЕКТРОИНСТРУМЕНТЫ": [],
-            "🔋 БЕСПРОВОДНЫЕ ИНСТРУМЕНТЫ": [
-                {name: "Аккумуляторная ударная дрель CIDLI20558", desc: "Компактная бесщеточная дрель P20S. Мощность 55 Нм, ударная функция, 2 аккумулятора 2.0Ah в комплекте, кейс.", price: "600 000", old: "670 000", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1099.jpg"}
-                {name: "Компактная бесщеточная дрель CDLI20668", desc: "Бесщеточная дрель P20S. Крутящий момент 66 Нм, 13 мм металлический патрон. В комплекте: 2 аккумулятора 2.0Ah, зарядное устройство, кейс.", price: "675 000", old: "795 000", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1100.jpg"}
-            ],
             "⚡ АККУМУЛЯТОРНЫЕ 42V": [],
             "📏 ИЗМЕРИТЕЛЬНЫЕ ИНСТРУМЕНТЫ": [],
             "💨 ПНЕВМАТИЧЕСКИЕ ИНСТРУМЕНТЫ": [],
@@ -85,7 +85,7 @@
             let items = menu[cat].length > 0 
                 ? menu[cat].map(i => `
                     <div class="card" onclick='showDetails(${JSON.stringify(i)})'>
-                        ${i.old ? '<div class="discount-badge">Скидка 12%</div>' : ''}
+                        ${i.old ? '<div class="discount-badge">Скидка</div>' : ''}
                         <img src="${i.img}">
                         <div class="name">${i.name}</div>
                         <div class="price">${i.old ? '<span class="old-price">'+i.old+' сум</span>' : ''}${i.price} сум</div>
