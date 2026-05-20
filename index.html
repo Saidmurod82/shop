@@ -9,19 +9,17 @@
         body { font-family: sans-serif; background: #121212; color: #fff; margin: 0; padding-bottom: 70px; }
         .header { text-align: center; padding: 15px; background: #000; border-bottom: 2px solid #ffcc00; position: sticky; top: 0; z-index: 100; font-weight: bold; }
         .banner { width: 100%; display: block; border-bottom: 2px solid #ffcc00; }
-        
         .cat-btn { width: 100%; padding: 16px; background: #252525; border: none; border-bottom: 1px solid #333; color: #fff; text-align: left; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; }
         .grid { display: none; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px; background: #1a1a1a; }
-        .card { background: #252525; padding: 8px; border-radius: 6px; text-align: center; border: 1px solid #333; }
+        .card { background: #252525; padding: 8px; border-radius: 6px; text-align: center; border: 1px solid #333; position: relative; }
         .card img { width: 100%; height: 100px; object-fit: contain; background: #fff; border-radius: 4px; margin-bottom: 5px; }
+        .discount-badge { position: absolute; top: 8px; left: 8px; background: #ff0000; color: #fff; font-size: 9px; font-weight: bold; padding: 2px 5px; border-radius: 3px; z-index: 10; }
         .name { font-size: 11px; height: 32px; overflow: hidden; font-weight: bold; margin-bottom: 5px; }
         .price { color: #ffcc00; font-size: 13px; font-weight: bold; }
         .old-price { color: #888; text-decoration: line-through; font-size: 10px; display: block; }
         .order-btn { background: #ffcc00; border: none; padding: 8px; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 11px; width: 100%; margin-top: 5px; color: #000; }
-        
         .footer-buttons { display: flex; padding: 10px; background: #000; border-top: 2px solid #ffcc00; position: fixed; bottom: 0; width: 100%; box-sizing: border-box; z-index: 999; }
         .footer-buttons button { flex: 1; margin: 0 5px; padding: 12px; background: #ffcc00; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; color: #000; }
-        
         #modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 9999; }
         .modal { background: #252525; padding: 20px; border-radius: 10px; width: 85%; text-align: center; border: 1px solid #ffcc00; }
         .phone-link { display: block; color: #28a745; font-size: 22px; font-weight: bold; text-decoration: none; margin: 20px 0; }
@@ -31,14 +29,11 @@
 <body>
     <div class="header">INGCO TOOLS</div>
     <img src="https://raw.githubusercontent.com/Saidmurod82/shop/main/1060.jpg" class="banner" alt="INGCO">
-    
     <div id="app"></div>
-
     <div class="footer-buttons">
         <button onclick="alert('Адрес: Рынок Изза Курилиш, магазин INGCO 1/12')">📍 Адрес</button>
         <button onclick="window.location.href='tel:+998903553377'">📞 Контакт</button>
     </div>
-
     <div id="modal-overlay">
         <div class="modal">
             <p id="m-text" style="font-weight: bold; line-height: 1.4; margin-bottom: 0;"></p>
@@ -46,7 +41,6 @@
             <span class="close-link" onclick="document.getElementById('modal-overlay').style.display='none'">ЗАКРЫТЬ</span>
         </div>
     </div>
-
     <script>
         const menu = {
             "🛠 РУЧНЫЕ ИНСТРУМЕНТЫ": [
@@ -60,25 +54,24 @@
             "🌳 САДОВЫЕ ИНСТРУМЕНТЫ": [],
             "⚙ ГЕНЕРАТОРЫ": []
         };
-
         const app = document.getElementById('app');
         for (let cat in menu) {
-            let items = menu[cat].map(i => `<div class="card">
-                ${i.img ? `<img src="${i.img}">` : ''}
-                <div class="name">${i.name}</div>
-                <div class="price">${i.old ? '<span class="old-price">'+i.old+' сум</span>' : ''}${i.price} сум</div>
-                <button class="order-btn" onclick="showOrder('${i.name}')">ЗАКАЗАТЬ</button>
-            </div>`).join('');
+            let items = menu[cat].length > 0 
+                ? menu[cat].map(i => `<div class="card">
+                    ${i.old ? '<div class="discount-badge">Скидка 12%</div>' : ''}
+                    ${i.img ? `<img src="${i.img}">` : ''}
+                    <div class="name">${i.name}</div>
+                    <div class="price">${i.old ? '<span class="old-price">'+i.old+' сум</span>' : ''}${i.price} сум</div>
+                    <button class="order-btn" onclick="showOrder('${i.name}')">ЗАКАЗАТЬ</button>
+                </div>`).join('') 
+                : '<div style="padding:10px; color:#666; font-size:12px;">Товары скоро появятся...</div>';
             app.innerHTML += `<button class="cat-btn" onclick="this.nextElementSibling.style.display=(this.nextElementSibling.style.display==='grid'?'none':'grid')">${cat} <span>▶</span></button><div class="grid">${items}</div>`;
         }
-
         function showOrder(name) {
             document.getElementById('m-text').innerHTML = "Для заказа " + name + "<br>Позвоните менеджеру:";
             document.getElementById('modal-overlay').style.display = "flex";
         }
-
         window.Telegram.WebApp.ready();
-        window.Telegram.WebApp.expand();
     </script>
 </body>
 </html>
