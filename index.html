@@ -6,27 +6,23 @@
     <title>INGCO TOOLS</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #121212; color: #fff; margin: 0; padding-bottom: 80px; }
-        .header { text-align: center; padding: 15px; background: #000; border-bottom: 2px solid #ffcc00; position: sticky; top: 0; z-index: 100; font-weight: bold; font-size: 18px; }
+        body { font-family: sans-serif; background: #121212; color: #fff; margin: 0; padding-bottom: 70px; }
+        .header { text-align: center; padding: 15px; background: #000; border-bottom: 2px solid #ffcc00; position: sticky; top: 0; z-index: 100; font-weight: bold; }
         .banner { width: 100%; display: block; border-bottom: 2px solid #ffcc00; }
-        .cat-btn { width: 100%; padding: 16px; background: #252525; border: none; border-bottom: 1px solid #333; color: #fff; text-align: left; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .cat-btn { width: 100%; padding: 16px; background: #252525; border: none; border-bottom: 1px solid #333; color: #fff; text-align: left; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; }
         .grid { display: none; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px; background: #1a1a1a; }
-        .card { background: #252525; padding: 8px; border-radius: 6px; text-align: center; border: 1px solid #333; position: relative; cursor: pointer; transition: transform 0.2s; }
-        .card:active { transform: scale(0.95); }
+        .card { background: #252525; padding: 8px; border-radius: 6px; text-align: center; border: 1px solid #333; position: relative; }
         .card img { width: 100%; height: 100px; object-fit: contain; background: #fff; border-radius: 4px; margin-bottom: 5px; }
         .discount-badge { position: absolute; top: 8px; left: 8px; background: #ff0000; color: #fff; font-size: 9px; font-weight: bold; padding: 2px 5px; border-radius: 3px; z-index: 10; }
-        .name { font-size: 11px; height: 32px; overflow: hidden; font-weight: bold; margin-bottom: 5px; line-height: 1.2; }
+        .name { font-size: 11px; height: 32px; overflow: hidden; font-weight: bold; margin-bottom: 5px; }
         .price { color: #ffcc00; font-size: 13px; font-weight: bold; }
-        .old-price { color: #888; text-decoration: line-through; font-size: 10px; display: block; }
-        
-        #modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; justify-content: center; align-items: center; }
-        .modal { background: #252525; padding: 20px; border-radius: 10px; width: 85%; border: 1px solid #ffcc00; text-align: center; position: relative; }
-        .modal img { width: 100%; max-height: 220px; object-fit: contain; background: #fff; border-radius: 6px; margin-bottom: 15px; }
-        .modal-price { font-size: 22px; color: #ffcc00; font-weight: bold; margin: 10px 0; }
-        .order-btn { background: #ffcc00; border: none; padding: 14px; border-radius: 5px; font-weight: bold; width: 100%; color: #000; margin-top: 15px; cursor: pointer; font-size: 14px; }
-        
+        .order-btn { background: #ffcc00; border: none; padding: 8px; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 11px; width: 100%; margin-top: 5px; color: #000; }
         .footer-buttons { display: flex; padding: 10px; background: #000; border-top: 2px solid #ffcc00; position: fixed; bottom: 0; width: 100%; box-sizing: border-box; z-index: 999; }
         .footer-buttons button { flex: 1; margin: 0 5px; padding: 12px; background: #ffcc00; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; color: #000; }
+        #modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 9999; }
+        .modal { background: #252525; padding: 20px; border-radius: 10px; width: 85%; text-align: center; border: 1px solid #ffcc00; }
+        .phone-link { display: block; color: #28a745; font-size: 22px; font-weight: bold; text-decoration: none; margin: 20px 0; }
+        .close-link { display: block; color: #888; margin-top: 15px; font-size: 12px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -41,63 +37,52 @@
 
     <div id="modal-overlay">
         <div class="modal">
-            <img id="m-img" src="">
-            <h3 id="m-name" style="margin: 5px 0;"></h3>
-            <p id="m-desc" style="font-size: 14px; color: #ccc; line-height: 1.4;"></p>
-            <div class="modal-price" id="m-price"></div>
-            <button class="order-btn" onclick="window.location.href='tel:+998903553377'">СВЯЗАТЬСЯ С МЕНЕДЖЕРОМ</button>
-            <p style="margin-top:20px; font-size:12px; color:#888; cursor:pointer;" onclick="document.getElementById('modal-overlay').style.display='none'">ЗАКРЫТЬ</p>
+            <p id="m-text" style="font-weight: bold; line-height: 1.4; margin-bottom: 0;"></p>
+            <a href="tel:+998903553377" class="phone-link">+998 90 355 33 77</a>
+            <span class="close-link" onclick="document.getElementById('modal-overlay').style.display='none'">ЗАКРЫТЬ</span>
         </div>
     </div>
 
     <script>
         const menu = {
-            "🛠 РУЧНЫЕ ИНСТРУМЕНТЫ": [
-                {name: "Тонкогубцы изогнутые HHBNP28160", desc: "INDUSTRIAL, 160мм. Специальная конструкция для работы в труднодоступных местах.", price: "45 000", old: "52 000", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1092.jpg"},
-                {name: "Болторез HMBC0808 200 мм", desc: "INDUSTRIAL, 8 дюймов. Мощный инструмент для резки проволоки и прутов.", price: "50 000", old: "58 000", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1093.webp"},
-                {name: "Бокорезы усиленные HHDCP08188", desc: "INDUSTRIAL, 180мм. Усиленная конструкция для тяжелых работ.", price: "50 000", old: "58 000", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1094.webp"},
-                {name: "Бокорезы многофункциональные 6 в 1", desc: "INDUSTRIAL, 200мм. Резка, зачистка, обжим, снятие заусенцев.", price: "73 000", old: "83 000", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1096.webp"},
-                {name: "Тонкогубцы многофункциональные 6 в 1", desc: "INDUSTRIAL, 200мм. Универсальный инструмент с множеством функций.", price: "83 000", old: "95 000", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1097.webp"},
-                {name: "Универсальные ножницы HES0187", desc: "INDUSTRIAL, 178мм (7 дюймов). Идеальны для резки проводов, кожи, проволочной сетки.", price: "37 000", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1098.webp"},
-                {name: "Плотницкие плоскогубцы HCPP02200", desc: "Размер: 8 дюймов (200 мм). Материал: Cr-V сталь. Обработка поверхности: черное покрытие и полировка.", price: "45 000", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1111.jpg"},
-                {name: "Многофункциональные плоскогубцы 8-в-1 HMFCP28200", desc: "Размер: 200 мм (8 дюймов). Материал: Cr-V сталь, тефлоновое покрытие. Функции: зажим, резка, зачистка, обжим, снятие заусенцев и др.", price: "80 000", old: "95 000", discount: "Скидка 11%", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1114.webp"},
-                {name: "Комбинированные плоскогубцы 8-в-1 HCCP58200", desc: "Размер: 8 дюймов (200 мм). Экономия энергии на 65% по сравнению с обычными. Материал: Cr-V сталь, тефлоновое покрытие.", price: "73 000", old: "85 000", discount: "Скидка 11%", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1115.webp"}
+            "РУЧНЫЕ ИНСТРУМЕНТЫ": [
+                {name: "Тонкогубцы изогнутые HHBNP28160", price: "45 000", old: "52 000", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1092.jpg"}
             ],
-            "🔋 БЕСПРОВОДНЫЕ ИНСТРУМЕНТЫ": [
-                {name: "Аккумуляторная ударная дрель CIDLI20558", desc: "Компактная бесщеточная дрель P20S. Мощность 55 Нм, ударная функция, 2 аккумулятора 2.0Ah в комплекте, кейс.", price: "600 000", old: "670 000", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1099.jpg"},
-                {name: "Компактная бесщеточная дрель CDLI20668", desc: "Бесщеточная дрель P20S. 66 Нм, 13 мм патрон. В комплекте: 2 аккумулятора 2.0Ah, зарядка, кейс.", price: "675 000", old: "795 000", discount: "Скидка 15%", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1100.jpg"},
-                {name: "Компактная бесщеточная ударная дрель CIDLI20768", desc: "Бесщеточная дрель P20S, 76 Нм. В комплекте: 2 аккумулятора 2.0Ah, зарядка, кейс, 47 принадлежностей.", price: "750 000", old: "860 000", discount: "Скидка 12%", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1116.webp"}
-                {name: "Компактная бесщеточная ударная дрель CIDLI20968", desc: "Бесщеточная дрель P20S, 96 Нм. В комплекте: 2 аккумулятора 2.0Ah, зарядка, кейс", price: "1070000", old: "1180000", discount: "Скидка 15%", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1117.webp"}
-            ],
-            "⚡ ЭЛЕКТРОИНСТРУМЕНТЫ": [],
-            "⚡ АККУМУЛЯТОРНЫЕ 42V": [],
-            "📏 ИЗМЕРИТЕЛЬНЫЕ ИНСТРУМЕНТЫ": [],
-            "💨 ПНЕВМАТИЧЕСКИЕ ИНСТРУМЕНТЫ": [],
-            "🌳 САДОВЫЕ ИНСТРУМЕНТЫ": [],
-            "⚙ ГЕНЕРАТОРЫ": []
+            "ЭЛЕКТРОИНСТРУМЕНТЫ": [],
+            "БЕСПРОВОДНЫЕ ИНСТРУМЕНТЫ": [],
+            "АККУМУЛЯТОРНЫЕ 42V": [],
+            "ИЗМЕРИТЕЛЬНЫЕ ИНСТРУМЕНТЫ": [],
+            "ПНЕВМАТИЧЕСКИЕ ИНСТРУМЕНТЫ": [],
+            "САДОВЫЕ ИНСТРУМЕНТЫ": [],
+            "ГЕНЕРАТОРЫ": []
         };
 
-        function showDetails(item) {
-            document.getElementById('m-img').src = item.img;
-            document.getElementById('m-name').innerText = item.name;
-            document.getElementById('m-desc').innerText = item.desc;
-            document.getElementById('m-price').innerText = item.price + " сум";
-            document.getElementById('modal-overlay').style.display = "flex";
-        }
-
         const app = document.getElementById('app');
+
         for (let cat in menu) {
             let items = menu[cat].length > 0 
                 ? menu[cat].map(i => `
-                    <div class="card" onclick='showDetails(${JSON.stringify(i)})'>
-                        ${i.discount ? '<div class="discount-badge">' + i.discount + '</div>' : ''}
-                        <img src="${i.img}">
+                    <div class="card">
+                        ${i.old ? '<div class="discount-badge">Скидка</div>' : ''}
+                        <img src="${i.img}" alt="${i.name}">
                         <div class="name">${i.name}</div>
-                        <div class="price">${i.old ? '<span class="old-price">'+i.old+' сум</span>' : ''}${i.price} сум</div>
+                        <div class="price">${i.price} сум</div>
+                        <button class="order-btn" onclick="showOrder('${i.name}')">ЗАКАЗАТЬ</button>
                     </div>`).join('') 
-                : '<div style="padding:15px; color:#666; font-size:12px;">Товары скоро появятся...</div>';
-            app.innerHTML += `<button class="cat-btn" onclick="this.nextElementSibling.style.display=(this.nextElementSibling.style.display==='grid'?'none':'grid')">${cat} <span>▶</span></button><div class="grid">${items}</div>`;
+                : '<div style="padding:10px; color:#666; font-size:12px;">Товары скоро появятся...</div>';
+
+            app.innerHTML += `
+                <button class="cat-btn" onclick="this.nextElementSibling.style.display=(this.nextElementSibling.style.display==='grid'?'none':'grid')">
+                    ${cat} <span>▶</span>
+                </button>
+                <div class="grid">${items}</div>`;
         }
+
+        function showOrder(name) {
+            document.getElementById('m-text').innerHTML = "Для заказа " + name + "<br>Позвоните менеджеру:";
+            document.getElementById('modal-overlay').style.display = "flex";
+        }
+
         window.Telegram.WebApp.ready();
     </script>
 </body>
