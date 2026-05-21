@@ -60,12 +60,13 @@
                 {name: "Тонкогубцы многофункциональные 6 в 1", desc: "INDUSTRIAL, 200мм. Универсальный инструмент с множеством функций.", price: "83 000", old: "95 000", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1097.webp"},
                 {name: "Универсальные ножницы HES0187", desc: "INDUSTRIAL, 178мм (7 дюймов). Идеальны для резки проводов, кожи, проволочной сетки.", price: "37 000", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1098.webp"},
                 {name: "Плотницкие плоскогубцы HCPP02200", desc: "Размер: 8 дюймов (200 мм). Материал: Cr-V сталь. Обработка поверхности: черное покрытие и полировка.", price: "45 000", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1111.jpg"},
-                {name: "Многофункциональные плоскогубцы 8-в-1 HMFCP28200", desc: "Размер: 200 мм (8 дюймов). Материал: Cr-V сталь, тефлоновое покрытие. Функции: зажим, резка, зачистка, обжим, снятие заусенцев и др.", price: "80 000", old: "95 000", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1114.webp"},
-                {name: "Комбинированные плоскогубцы 8-в-1 HCCP58200", desc: "Размер: 8 дюймов (200 мм). Экономия энергии на 65% по сравнению с обычными. Материал: Cr-V сталь, тефлоновое покрытие.", price: "73 000", old: "85 000", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1115.webp"}
+                {name: "Многофункциональные плоскогубцы 8-в-1 HMFCP28200", desc: "Размер: 200 мм (8 дюймов). Материал: Cr-V сталь, тефлоновое покрытие. Функции: зажим, резка, зачистка, обжим, снятие заусенцев и др.", price: "80 000", old: "95 000", discount: "Скидка 11%", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1114.webp"},
+                {name: "Комбинированные плоскогубцы 8-в-1 HCCP58200", desc: "Размер: 8 дюймов (200 мм). Экономия энергии на 65% по сравнению с обычными. Материал: Cr-V сталь, тефлоновое покрытие.", price: "73 000", old: "85 000", discount: "Скидка 11%", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1115.webp"}
             ],
             "🔋 БЕСПРОВОДНЫЕ ИНСТРУМЕНТЫ": [
                 {name: "Аккумуляторная ударная дрель CIDLI20558", desc: "Компактная бесщеточная дрель P20S. Мощность 55 Нм, ударная функция, 2 аккумулятора 2.0Ah в комплекте, кейс.", price: "600 000", old: "670 000", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1099.jpg"},
-                {name: "Компактная бесщеточная дрель CDLI20668", desc: "Бесщеточная дрель P20S. 66 Нм, 13 мм патрон. В комплекте: 2 аккумулятора 2.0Ah, зарядка, кейс.", price: "675 000", old: "795 000", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1100.jpg"}
+                {name: "Компактная бесщеточная дрель CDLI20668", desc: "Бесщеточная дрель P20S. 66 Нм, 13 мм патрон. В комплекте: 2 аккумулятора 2.0Ah, зарядка, кейс.", price: "675 000", old: "795 000", discount: "Скидка 15%", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1100.jpg"},
+                {name: "Компактная бесщеточная ударная дрель CIDLI20768", desc: "Бесщеточная дрель P20S, 76 Нм. В комплекте: 2 аккумулятора 2.0Ah, зарядка, кейс, 47 принадлежностей.", price: "750 000", old: "860 000", discount: "Скидка 12%", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1116.webp"}
             ],
             "⚡ ЭЛЕКТРОИНСТРУМЕНТЫ": [],
             "⚡ АККУМУЛЯТОРНЫЕ 42V": [],
@@ -88,7 +89,7 @@
             let items = menu[cat].length > 0 
                 ? menu[cat].map(i => `
                     <div class="card" onclick='showDetails(${JSON.stringify(i)})'>
-                        ${i.old ? '<div class="discount-badge">Скидка</div>' : ''}
+                        ${i.discount ? '<div class="discount-badge">' + i.discount + '</div>' : ''}
                         <img src="${i.img}">
                         <div class="name">${i.name}</div>
                         <div class="price">${i.old ? '<span class="old-price">'+i.old+' сум</span>' : ''}${i.price} сум</div>
