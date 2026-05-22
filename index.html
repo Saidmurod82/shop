@@ -20,7 +20,8 @@
         .old-price { color: #888; text-decoration: line-through; font-size: 10px; display: block; }
         #modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; justify-content: center; align-items: center; }
         .modal { background: #252525; padding: 20px; border-radius: 10px; width: 85%; border: 1px solid #ffcc00; text-align: center; position: relative; }
-        .modal img { width: 100%; max-height: 220px; object-fit: contain; background: #fff; border-radius: 6px; margin-bottom: 15px; }
+        .modal img { width: 100%; max-height: 220px; object-fit: contain; background: #fff; border-radius: 6px; margin-bottom: 15px; transition: transform 0.3s ease; cursor: zoom-in; }
+        .modal img:active { transform: scale(1.5); cursor: zoom-out; }
         .modal-price { font-size: 22px; color: #ffcc00; font-weight: bold; margin: 10px 0; }
         .order-btn { background: #ffcc00; border: none; padding: 14px; border-radius: 5px; font-weight: bold; width: 100%; color: #000; margin-top: 15px; cursor: pointer; font-size: 14px; }
         .footer-buttons { display: flex; padding: 10px; background: #000; border-top: 2px solid #ffcc00; position: fixed; bottom: 0; width: 100%; box-sizing: border-box; z-index: 999; }
@@ -62,6 +63,7 @@
                 {name: "Комбинированные плоскогубцы 8-в-1 HCCP58200", desc: "Размер: 8 дюймов (200 мм).", price: "73 000", old: "85 000", discount: "Скидка 11%", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1115.webp"}
             ],
             "🔋 БЕСПРОВОДНЫЕ ИНСТРУМЕНТЫ": [
+                {name: "Набор 4 в 1 INGCO COSLI250608", desc: "Набор из 4 инструментов (дрель, гайковерт, термофен, фонарь) + 2 акб 5.0Ач.", price: "3 140 000", old: "3 700 000", discount: "Скидка 15%", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1164.webp"},
                 {name: "Аккумуляторная ударная дрель CIDLI20558", desc: "Компактная бесщеточная дрель P20S.", price: "600 000", old: "670 000", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1099.jpg"},
                 {name: "Компактная бесщеточная дрель CDLI20668", desc: "Бесщеточная дрель P20S.", price: "675 000", old: "795 000", discount: "Скидка 15%", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1100.jpg"},
                 {name: "Компактная бесщеточная ударная дрель CIDLI20768", desc: "Бесщеточная дрель P20S, 76 Нм.", price: "750 000", old: "860 000", discount: "Скидка 12%", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1116.webp"},
