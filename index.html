@@ -34,7 +34,7 @@
     <div id="app"></div>
 
     <div class="footer-buttons">
-        <button onclick="alert('Адрес: Рынок Изза Курилиш, Бозор INGCO 1/12 время работы от 9:00 до 18:00. https://maps.app.goo.gl/ssqAzBBhuqMYuM1a8?g_st=ac')">📍 Адрес</button>
+        <button onclick="window.Telegram.WebApp.openLink('https://maps.app.goo.gl/ssqAzBBhuqMYuM1a8')">📍 Адрес</button>
         <button onclick="window.location.href='tel:+998903553377'">📞 Контакт</button>
     </div>
 
@@ -111,7 +111,7 @@
         for (let cat in menu) {
             let itemsHTML = menu[cat].length > 0 
                 ? menu[cat].map(i => `
-                    <div class="card" onclick='showDetails(${JSON.stringify(i).replace(/'/g, "&#39;")})'>
+                    <div class="card" onclick='showDetails(${JSON.stringify(i).replace(/'/g, "'")})'>
                         ${i.discount ? '<div class="discount-badge">' + i.discount + '</div>' : ''}
                         <img src="${i.img}" alt="${i.name}">
                         <div class="name">${i.name}</div>
