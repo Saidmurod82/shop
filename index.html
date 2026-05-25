@@ -23,6 +23,7 @@
         #modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; justify-content: center; align-items: center; }
         .modal { background: #252525; padding: 20px; border-radius: 10px; width: 85%; border: 1px solid #ffcc00; text-align: center; position: relative; }
         .modal img { width: 100%; max-height: 220px; object-fit: contain; background: #fff; border-radius: 6px; margin-bottom: 15px; transition: transform 0.3s ease; cursor: zoom-in; }
+        .modal img:active { transform: scale(1.5); cursor: zoom-out; }
         .modal-price { font-size: 22px; color: #ffcc00; font-weight: bold; margin: 10px 0; }
         .order-btn { background: #ffcc00; border: none; padding: 14px; border-radius: 5px; font-weight: bold; width: 100%; color: #000; margin-top: 15px; cursor: pointer; font-size: 14px; }
         .footer-buttons { display: flex; padding: 10px; background: #000; border-top: 2px solid #ffcc00; position: fixed; bottom: 0; width: 100%; box-sizing: border-box; z-index: 999; }
@@ -32,7 +33,7 @@
 <body>
     <div class="header">INGCO TOOLS</div>
     <div class="search-box">
-        <input type="text" id="searchInput" placeholder="🔍 Поиск по названию..." oninput="filterProducts()">
+        <input type="text" id="searchInput" placeholder="🔍 Поиск инструментов..." oninput="filterProducts()">
     </div>
     <img src="https://raw.githubusercontent.com/Saidmurod82/shop/main/1060.jpg" class="banner" alt="INGCO">
     <div id="app"></div>
@@ -65,63 +66,43 @@
                 {name: "Плотницкие плоскогубцы HCPP02200", desc: "Размер: 8 дюймов (200 мм).", price: "45 000", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1111.jpg"},
                 {name: "Многофункциональные плоскогубцы 8-в-1 HMFCP28200", desc: "Размер: 200 мм (8 дюймов).", price: "80 000", old: "95 000", discount: "Скидка 11%", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1114.webp"},
                 {name: "Комбинированные плоскогубцы 8-в-1 HCCP58200", desc: "Размер: 8 дюймов (200 мм).", price: "73 000", old: "85 000", discount: "Скидка 11%", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1115.webp"},
-                {name: "Бокорезы INGCO HDCP28168", desc: "INDUSTRIAL, 160 мм, сталь Cr-V.", price: "40 000", img: "https://static.insales-cdn.com/images/products/1/5156/837448740/HDCP28168.png"},
-                {name: "Клещи переставные INGCO HHCCB0210", desc: "INDUSTRIAL, 250 мм, Cr-V.", price: "50 000", img: "https://static.insales-cdn.com/images/products/1/426/819782058/HHCCB0210.png"},
-                {name: "Автоматический стриппер INGCO HWSP102418", desc: "INDUSTRIAL, 0.2-6 мм².", price: "95 000", img: "https://static.insales-cdn.com/images/products/1/7493/837590341/HWSP102418.png"},
-                {name: "Пресс-клещи INGCO HRCPG05210", desc: "INDUSTRIAL, 0.25-10 мм².", price: "135 000", img: "https://static.insales-cdn.com/images/products/1/7918/837615342/HRCPG05210.png"}
+                {name: "Бокорезы INGCO HDCP28168", desc: "INDUSTRIAL, размер 160 мм (6 дюймов), высококачественная сталь Cr-V, эргономичные двухцветные рукоятки.", price: "40 000", img: "https://static.insales-cdn.com/images/products/1/5156/837448740/HDCP28168.png"},
+                {name: "Клещи переставные (попугай) INGCO HHCCB0210", desc: "INDUSTRIAL, 250 мм (10 дюймов), изготовлены из высококачественной хромованадиевой стали (Cr-V), усиленная конструкция.", price: "50 000", img: "https://static.insales-cdn.com/images/products/1/426/819782058/HHCCB0210.png"},
+                {name: "Автоматический стриппер INGCO HWSP102418", desc: "INDUSTRIAL, инструмент для снятия изоляции, сечение провода 0.2-6 мм², оснащен функцией обжима и резки проводов.", price: "95 000", img: "https://static.insales-cdn.com/images/products/1/7493/837590341/HWSP102418.png"},
+                {name: "Пресс-клещи для втулочных наконечников INGCO HRCPG05210", desc: "INDUSTRIAL, ручные, для обжима втулочных (трубчатых) наконечников, диапазон сечения проводов: 0.25-10 мм², длина инструмента: 160 мм (6 дюймов).", price: "135 000", img: "https://static.insales-cdn.com/images/products/1/7918/837615342/HRCPG05210.png"},
             ],
             "🔋 БЕСПРОВОДНЫЕ ИНСТРУМЕНТЫ": [
                 {name: "Аккумуляторная ударная дрель CIDLI20558", desc: "Компактная бесщеточная дрель P20S.", price: "600 000", old: "670 000", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1099.jpg"},
                 {name: "Компактная бесщеточная дрель CDLI20668", desc: "Бесщеточная дрель P20S.", price: "675 000", old: "795 000", discount: "Скидка 15%", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1100.jpg"},
                 {name: "Компактная бесщеточная ударная дрель CIDLI20768", desc: "Бесщеточная дрель P20S, 76 Нм.", price: "750 000", old: "860 000", discount: "Скидка 12%", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1116.webp"},
                 {name: "Компактная бесщеточная ударная дрель CIDLI20968", desc: "Бесщеточная дрель P20S, 96 Нм.", price: "1 070 000", old: "1 180 000", discount: "Скидка 15%", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1117.webp"},
-                {name: "Аккумуляторный гайковерт INGCO CIWLI2085", desc: "INDUSTRIAL, 20В, 850 Нм.", price: "1 600 000", old: "1 850 000", discount: "Скидка 13%", img: "https://ingcomoldova.md/wp-content/uploads/2025/05/CIWLI2085.webp"},
-                {name: "Набор 2 в 1 INGCO COSLI23056", desc: "INDUSTRIAL, гайковерт 405 Нм.", price: "965 000", old: "1 100 000", discount: "Скидка 12%", img: "https://ingcomoldova.md/wp-content/uploads/2025/12/COSLI23056.webp"},
-                {name: "Аккумуляторный гайковерт INGCO CIWLI20135", desc: "INDUSTRIAL, 20В, 1350 Нм.", price: "2 720 000", old: "3 150 000", discount: "Скидка 13%", img: "https://static.insales-cdn.com/images/products/1/6434/1024309538/CIWLI20135.jpg"},
-                {name: "Аккумуляторная угловая шлифмашина INGCO CAGLI271532", desc: "INDUSTRIAL, 20В, 125мм.", price: "720 000", old: "850 000", discount: "Скидка 15%", img: "https://ingcomoldova.md/wp-content/uploads/2025/05/CAGLI271532.webp"}
+                {name: "Аккумуляторный гайковерт INGCO CIWLI2085", desc: "INDUSTRIAL, 20В, 1/2 дюйма, 850 Нм, бесщеточный двигатель, 3 режима скорости, LED подсветка.", price: "1 600 000", old: "1 850 000", discount: "Скидка 13%", img: "https://ingcomoldova.md/wp-content/uploads/2025/05/CIWLI2085.webp"},
+                {name: "Набор 2 в 1 INGCO COSLI23056", desc: "INDUSTRIAL P20S, включает бесщеточный гайковерт 405 Нм (1/2 дюйма) и мощный светодиодный фонарь. В комплекте 2 АКБ 4.0Ач, ЗУ и кейс.", price: "965 000", old: "1 100 000", discount: "Скидка 12%", img: "https://ingcomoldova.md/wp-content/uploads/2025/12/COSLI23056.webp"},
+                {name: "Аккумуляторный гайковерт INGCO CIWLI20135", desc: "INDUSTRIAL, 20В, 1/2 дюйма, 1350 Нм, бесщеточный двигатель, 3 режима скорости, LED подсветка.", price: "2 720 000", old: "3 150 000", discount: "Скидка 13%", img: "https://static.insales-cdn.com/images/products/1/6434/1024309538/CIWLI20135.jpg"},
+                {name: "Аккумуляторная угловая шлифмашина INGCO CAGLI271532", desc: "INDUSTRIAL, 20В, 125мм, бесщеточный двигатель, 3 режима скорости, эргономичный корпус.", price: "720 000", old: "850 000", discount: "Скидка 15%", img: "https://ingcomoldova.md/wp-content/uploads/2025/05/CAGLI271532.webp"},
+                {name: "Перфоратор аккумуляторный INGCO CRHLI212282", desc: "INDUSTRIAL P20S, 20В, бесщеточный, 3 режима (сверление, ударное сверление, долбление), энергия удара 2.0 Дж, патрон SDS-plus.", price: "980 000", old: "1 100 000", discount: "Скидка 15%", img: "https://ingcomoldova.md/wp-content/uploads/2025/10/CRHLI212282.webp"},
+                {name: "Перфоратор аккумуляторный INGCO CRHLI20208", desc: "INDUSTRIAL P20S, 20В, бесщеточный, 3 режима, энергия удара 2.0 Дж, патрон SDS-plus, отличная производительность для бетона.", price: "620 000", old: "730 000", discount: "Скидка 15%", img: "https://ingcomoldova.md/wp-content/uploads/2025/05/CRHLI20208.webp"},
+                {name: "Перфоратор аккумуляторный INGCO CRHLI202682", desc: "INDUSTRIAL P20S, 20В, бесщеточный, 3 режима работы, энергия удара 2.6 Дж, SDS-plus патрон, встроенная подсветка.", price: "1 070 000", old: "1 240 000", discount: "Скидка 14%", img: "https://ingcomoldova.md/wp-content/uploads/2025/10/CRHLI202682.webp"},
+                {name: "Перфоратор аккумуляторный INGCO CRHLI202482", desc: "INDUSTRIAL P20S, 20В, бесщеточный, 3 режима работы, энергия удара 2.4 Дж, патрон SDS-plus, антивибрационная система.", price: "1 000 000", old: "1 170 000", discount: "Скидка 14%", img: "https://ingcomoldova.md/wp-content/uploads/2026/01/CRHLI202482.webp"},
+                {name: "Перфоратор аккумуляторный INGCO CRHLI202862", desc: "INDUSTRIAL P20S, 20В, бесщеточный, 3 режима работы, энергия удара 2.8 Дж, патрон SDS-plus, высокая мощность для тяжелых работ.", price: "1 570 000", old: "1 850 000", discount: "Скидка 15%", img: "https://ingcomoldova.md/wp-content/uploads/2026/01/CRHLI202862.webp"},
             ],
             "🧰 НАБОРЫ БЕСПРОВОДНЫХ ИНСТРУМЕНТОВ": [ 
-                {name: "Набор 4 в 1 INGCO COSLI250608", desc: "Набор из 4 инструментов.", price: "3 140 000", old: "3 700 000", discount: "Скидка 15%", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1164.webp"},
-                {name: "Набор 3 в 1 INGCO COSLI250386", desc: "Набор из 3 гайковертов.", price: "3 200 000", old: "3 900 000", discount: "Скидка 18%", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1165.webp"}
+                {name: "Набор 4 в 1 INGCO COSLI250608", desc: "Набор из 4 инструментов (дрель, гайковерт, термофен, фонарь) + 2 акб 5.0Ач.", price: "3 140 000", old: "3 700 000", discount: "Скидка 15%", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1164.webp"},
+                {name: "Набор 3 в 1 INGCO COSLI250386", desc: "Набор из 3 ударных гайковертов (3/4 и 1/2) + 2 аккумулятора 5.0Ач, зарядное устройство и комплект головок.", price: "3 200 000", old: "3 900 000", discount: "Скидка 18%", img: "https://raw.githubusercontent.com/Saidmurod82/shop/main/1165.webp"},
+                {name: "Набор INGCO CKLI20766", desc: "Комплект: бесщеточная дрель (66 Нм, 13 мм) + мини-отрезная машина (76 мм). В комплекте 2 АКБ 2.0Ач, зарядка, кейс и 47 аксессуаров.", price: "950 000", old: "1 05 0000", discount: "Скидка 13%", img: "https://ingcomoldova.md/wp-content/uploads/2025/10/CKLI20766.webp"},
+                {name: "Набор инструментов INGCO HKTHP41662 (166 предметов)", desc: "Профессиональный набор ручного инструмента: молоток, плоскогубцы, отвертки, ключи, биты и насадки в удобном кейсе.", price: "840 000", old: "1 150 000", discount: "Скидка 16%", img: "https://ingcomoldova.md/wp-content/uploads/2026/02/HKTHP41662.webp"},
+                {name: "Набор инструментов INGCO HKTHP31521 (152 предмета)", desc: "Комплект профессионального инструмента в кейсе: ключи, торцевые головки, трещотки, отвертки и биты.", price: "945 000", old: "2 250 000", discount: "Скидка 14%", img: "https://ingcomoldova.md/wp-content/uploads/2025/05/HKTHP31521.webp"},
             ],
             "🔧 НАБОР ИНСТРУМЕНТОВ": [],
             "💦 НАСОСЫ И КЕРЧЕРЫ": [],
             "⚡ ЭЛЕКТРОИНСТРУМЕНТЫ": [],
             "⚡ АККУМУЛЯТОРНЫЕ 42V": [],
-            "🧳 ЯЩИКИ ДЛЯ ИНСТРУМЕНТОВ": [],
+            "🧳 ЯШИКИ ДЛЯ ИНСТРУМЕНТОВ": [],
             "📏 ИЗМЕРИТЕЛЬНЫЕ ИНСТРУМЕНТЫ": [],
             "💨 ПНЕВМАТИЧЕСКИЕ ИНСТРУМЕНТЫ": [],
             "🌳 САДОВЫЕ ИНСТРУМЕНТЫ": [],
-            "⚙ ГЕНЕРАТОРЫ": []
+            "⚙ ГЕНЕРАТОРЫ": [],
         };
-
-        function render() {
-            const app = document.getElementById('app');
-            app.innerHTML = '';
-            for (let cat in menu) {
-                let itemsHTML = menu[cat].length > 0 ? menu[cat].map(i => `
-                    <div class="card" onclick='showDetails(${JSON.stringify(i).replace(/'/g, "")})'>
-                        ${i.discount ? '<div class="discount-badge">' + i.discount + '</div>' : ''}
-                        <img src="${i.img}" alt="${i.name}">
-                        <div class="name">${i.name}</div>
-                        <div class="price">${i.old ? '<span class="old-price">'+i.old+' сум</span>' : ''}${i.price} сум</div>
-                    </div>`).join('') : '<div style="padding:15px; color:#666; font-size:12px;">Товары скоро появятся...</div>';
-                
-                app.innerHTML += `
-                    <button class="cat-btn" onclick="this.nextElementSibling.style.display=(this.nextElementSibling.style.display==='grid'?'none':'grid')">
-                        ${cat} <span>▼</span>
-                    </button>
-                    <div class="grid">${itemsHTML}</div>`;
-            }
-        }
-
-        function filterProducts() {
-            let query = document.getElementById('searchInput').value.toLowerCase();
-            document.querySelectorAll('.card').forEach(card => {
-                let name = card.querySelector('.name').innerText.toLowerCase();
-                card.style.display = name.includes(query) ? 'block' : 'none';
-            });
-        }
 
         function showDetails(item) {
             document.getElementById('m-img').src = item.img;
@@ -131,7 +112,33 @@
             document.getElementById('modal-overlay').style.display = "flex";
         }
 
-        render();
+        const app = document.getElementById('app');
+        for (let cat in menu) {
+            let itemsHTML = menu[cat].length > 0 
+                ? menu[cat].map(i => `
+                    <div class="card" onclick='showDetails(${JSON.stringify(i).replace(/'/g, "")})'>
+                        ${i.discount ? '<div class="discount-badge">' + i.discount + '</div>' : ''}
+                        <img src="${i.img}" alt="${i.name}">
+                        <div class="name">${i.name}</div>
+                        <div class="price">${i.old ? '<span class="old-price">'+i.old+' сум</span>' : ''}${i.price} сум</div>
+                    </div>`).join('') 
+                : '<div style="padding:15px; color:#666; font-size:12px;">Товары скоро появятся...</div>';
+
+            app.innerHTML += `
+                <button class="cat-btn" onclick="this.nextElementSibling.style.display=(this.nextElementSibling.style.display==='grid'?'none':'grid')">
+                    ${cat} <span>▶</span>
+                </button>
+                <div class="grid">${itemsHTML}</div>`;
+        }
+
+        function filterProducts() {
+            let query = document.getElementById('searchInput').value.toLowerCase();
+            document.querySelectorAll('.card').forEach(card => {
+                let name = card.querySelector('.name').innerText.toLowerCase();
+                card.style.display = name.includes(query) ? 'block' : 'none';
+            });
+        }
+        
         window.Telegram.WebApp.ready();
     </script>
 </body>
